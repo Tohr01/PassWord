@@ -21,8 +21,14 @@ struct MainView: View {
     @State var opacity_language_chooser = 1.0
     @State var viewLoaded : Bool = false
     
+    // Button background opacities
+    @State var opacity_generate_new_button = 0.1
+    @State var opacity_minus_button = 0.0
+    @State var opacity_plus_button = 0.0
+    @State var opacity_language_button = 0.1
+    @State var opacity_copy_buttom = 0.1
+    
     func initView() {
-        
         var index : [Int : String] = word_index_english
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
             lang_model.lang_set = true
@@ -66,6 +72,7 @@ struct MainView: View {
             VStack(spacing: 10.0) {
                 ///# Password row
                 HStack {
+                    // MARK: Password field
                     HStack {
                         Image("key")
                             .resizable()
@@ -83,6 +90,7 @@ struct MainView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                         .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Color("default_appearance"), lineWidth: 2))
                     
+                    // MARK: Copy to clipboard button
                     Button {
                         let pasteboard = NSPasteboard.general
                         pasteboard.declareTypes([.string], owner: nil)
@@ -99,32 +107,47 @@ struct MainView: View {
                     .aspectRatio(CGSize(width: 1, height: 1) ,contentMode: .fit)
                     .frame(width: 40, height: 40)
                     .opacity(0.5)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(0.1))
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_copy_buttom))
+                    .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                            .onChanged({ _ in
+                        self.opacity_copy_buttom = 0.2
+                    })
+                                            .onEnded({ _ in
+                        self.opacity_copy_buttom = 0.1
+                    }))
                 }
                 
                 ///# Button row
                 HStack {
-                    Button {
-                        easy_gen_pass()
-                    } label: {
+                    // MARK: Generate new password
+                    HStack {
                         Spacer()
                         Image("arrow.clockwise")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 20)
                             .foregroundColor(Color("default_appearance"))
-                        
                         Text(lang_model.current_lang == "de" ? "Neu generieren" : "Generate new")
                             .font(.system(size: 15, weight: .semibold, design: .monospaced))
                             .truncationMode(.tail)
-                        
                         Spacer()
                     }
-                    .buttonStyle(PlainButtonStyle())
                     .padding()
                     .frame(height: 40)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(0.1))
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_generate_new_button))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .onTapGesture(perform: {
+                        easy_gen_pass()
+                    })
+                    .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                            .onChanged({ _ in
+                        self.opacity_generate_new_button = 0.2
+                    })
+                                            .onEnded({ _ in
+                        self.opacity_generate_new_button  = 0.1
+                    }))
                     
+                    // MARK: Custom stepper
                     // Increase word length button
                     HStack {
                         Image("minus")
@@ -133,6 +156,7 @@ struct MainView: View {
                             .scaleEffect(0.5)
                             .frame(width: 40, height: 40)
                             .contentShape(Rectangle())
+                            .overlay(RoundedRectangle(cornerRadius: 0).fill(Color("default_appearance").opacity(opacity_minus_button)))
                             .onTapGesture(perform: {
                                 self.stepper_model.increase = false
                                 self.stepper_model.increaseValue()
@@ -140,12 +164,22 @@ struct MainView: View {
                             })
                             .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                         .onChanged({ _ in
+                                self.opacity_minus_button = 0.2
                                 self.stepper_model.increase = false
                                 self.stepper_model.start()
                             })
                                         .onEnded({ _ in
+                                opacity_minus_button = 0.1
                                 self.stepper_model.stop()
                                 easy_gen_pass()
+                            })
+                            )
+                            .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                                    .onChanged({ _handler in
+                                self.opacity_minus_button = 0.1
+                            })
+                                                    .onEnded({ _ in
+                                self.opacity_minus_button = 0.0
                             })
                             )
                         
@@ -159,6 +193,7 @@ struct MainView: View {
                             .scaleEffect(0.5)
                             .frame(width: 40, height: 40)
                             .contentShape(Rectangle())
+                            .overlay(RoundedRectangle(cornerRadius: 0).fill(Color("default_appearance").opacity(opacity_plus_button)))
                             .onTapGesture(perform: {
                                 self.stepper_model.increase = true
                                 self.stepper_model.increaseValue()
@@ -170,8 +205,17 @@ struct MainView: View {
                                 self.stepper_model.start()
                             })
                                         .onEnded({ _ in
+                                self.opacity_plus_button = 0.0
                                 self.stepper_model.stop()
                                 easy_gen_pass()
+                            })
+                            )
+                            .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                                    .onChanged({ _handler in
+                                self.opacity_plus_button = 0.1
+                            })
+                                                    .onEnded({ _ in
+                                self.opacity_plus_button = 0.0
                             })
                             )
                     }
@@ -179,8 +223,10 @@ struct MainView: View {
                     .padding(.trailing, 1)
                     .frame(height: 40)
                     .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(0.1))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .frame(height: 40)
                     
+                    // MARK: Change language
                     // Change language button
                     Button {
                         opacity_language_chooser = 1.0
@@ -196,7 +242,15 @@ struct MainView: View {
                     .buttonStyle(PlainButtonStyle())
                     .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                     .frame(width: 40, height: 40)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(0.1))
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_language_button))
+                    .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                            .onChanged({ _ in
+                        self.opacity_language_button = 0.2
+                    })
+                                            .onEnded({ _ in
+                        self.opacity_language_button = 0.1
+                    }))
+
                 }
             }
             .padding()
@@ -205,7 +259,6 @@ struct MainView: View {
             // MARK: Language Chooser
             // Checks if view settings initialized then adds LanguageChooser
             if viewLoaded {
-                
                 if #available(macOS 11.0, *) {
                     LanguageChooser(opacity: $opacity_language_chooser, current_language: $lang_model.current_lang)
                         .frame(minWidth: 470, idealWidth: 470, maxWidth: 800, minHeight: 125, idealHeight: 125, maxHeight: 150)

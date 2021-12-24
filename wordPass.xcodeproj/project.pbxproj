@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		C306CE6D2770F26C00102885 /* StepperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C306CE6C2770F26C00102885 /* StepperViewModel.swift */; };
-		C3831DC42772816D00CE382C /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3831DC32772816D00CE382C /* test.swift */; };
 		C3831DC6277294FC00CE382C /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3831DC5277294FC00CE382C /* LanguageViewModel.swift */; };
 		C3A763F92771FFB200103870 /* 27-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763DB2771FFB000103870 /* 27-eng.wordpass */; };
 		C3A763FA2771FFB200103870 /* 16-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763DC2771FFB000103870 /* 16-eng.wordpass */; };
@@ -98,7 +97,6 @@
 
 /* Begin PBXFileReference section */
 		C306CE6C2770F26C00102885 /* StepperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperViewModel.swift; sourceTree = "<group>"; };
-		C3831DC32772816D00CE382C /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 		C3831DC5277294FC00CE382C /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
 		C3A763DB2771FFB000103870 /* 27-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "27-eng.wordpass"; sourceTree = "<group>"; };
 		C3A763DC2771FFB000103870 /* 16-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "16-eng.wordpass"; sourceTree = "<group>"; };
@@ -226,7 +224,6 @@
 				C306CE6C2770F26C00102885 /* StepperViewModel.swift */,
 				C3A7641927720FCF00103870 /* Extentions.swift */,
 				C3C3F1B8276C1C06004C0261 /* LanguageChooser.swift */,
-				C3831DC32772816D00CE382C /* test.swift */,
 				C3BBCCC52766CC0B00AB3F2F /* password_gen.swift */,
 				C3BBCCC72766CC0E00AB3F2F /* password_gen_helper.swift */,
 				C3BBCCC12766CB9B00AB3F2F /* word_index_handler.swift */,
@@ -490,7 +487,6 @@
 				C3C5AF9927602A3B00178E4E /* MainView.swift in Sources */,
 				C306CE6D2770F26C00102885 /* StepperViewModel.swift in Sources */,
 				C3831DC6277294FC00CE382C /* LanguageViewModel.swift in Sources */,
-				C3831DC42772816D00CE382C /* test.swift in Sources */,
 				C3BBCCC62766CC0B00AB3F2F /* password_gen.swift in Sources */,
 				C3BBCCC82766CC0E00AB3F2F /* password_gen_helper.swift in Sources */,
 				C3BBCCC42766CBFD00AB3F2F /* word_index.swift in Sources */,
