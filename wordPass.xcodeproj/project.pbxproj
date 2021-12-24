@@ -38,7 +38,6 @@
 		C3A764142771FFB200103870 /* 18-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763F62771FFB100103870 /* 18-eng.wordpass */; };
 		C3A764152771FFB200103870 /* 29-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763F72771FFB100103870 /* 29-eng.wordpass */; };
 		C3A764162771FFB200103870 /* 10-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763F82771FFB200103870 /* 10-eng.wordpass */; };
-		C3A7641A27720FCF00103870 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A7641927720FCF00103870 /* Extentions.swift */; };
 		C3A7645227724C0700103870 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C3A7645127724C0700103870 /* MainMenu.xib */; };
 		C3BB2BD1277142CA002802B7 /* 5-de.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3BB2BA5277142C8002802B7 /* 5-de.wordpass */; };
 		C3BB2BD2277142CA002802B7 /* 14-de.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3BB2BA6277142C8002802B7 /* 14-de.wordpass */; };
@@ -127,7 +126,6 @@
 		C3A763F62771FFB100103870 /* 18-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "18-eng.wordpass"; sourceTree = "<group>"; };
 		C3A763F72771FFB100103870 /* 29-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "29-eng.wordpass"; sourceTree = "<group>"; };
 		C3A763F82771FFB200103870 /* 10-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "10-eng.wordpass"; sourceTree = "<group>"; };
-		C3A7641927720FCF00103870 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		C3A7645127724C0700103870 /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
 		C3BB2BA5277142C8002802B7 /* 5-de.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "5-de.wordpass"; sourceTree = "<group>"; };
 		C3BB2BA6277142C8002802B7 /* 14-de.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "14-de.wordpass"; sourceTree = "<group>"; };
@@ -216,18 +214,12 @@
 		C3C5AF9527602A3B00178E4E /* wordPass */ = {
 			isa = PBXGroup;
 			children = (
-				C3D976D927674AE1003CE09D /* words */,
 				C3C5AF9627602A3B00178E4E /* wordPassApp.swift */,
 				C3C5AF9827602A3B00178E4E /* MainView.swift */,
-				C3831DC5277294FC00CE382C /* LanguageViewModel.swift */,
 				C3A7645127724C0700103870 /* MainMenu.xib */,
-				C306CE6C2770F26C00102885 /* StepperViewModel.swift */,
-				C3A7641927720FCF00103870 /* Extentions.swift */,
-				C3C3F1B8276C1C06004C0261 /* LanguageChooser.swift */,
-				C3BBCCC52766CC0B00AB3F2F /* password_gen.swift */,
-				C3BBCCC72766CC0E00AB3F2F /* password_gen_helper.swift */,
-				C3BBCCC12766CB9B00AB3F2F /* word_index_handler.swift */,
-				C3BBCCC32766CBFD00AB3F2F /* word_index.swift */,
+				C3CDF27927755587006B00FF /* Additional_Views */,
+				C3CDF27827755579006B00FF /* ViewModels */,
+				C3CDF27627755557006B00FF /* password_generation */,
 				C3C5AF9A27602A3C00178E4E /* Assets.xcassets */,
 				C3C5AF9F27602A3C00178E4E /* wordPass.entitlements */,
 				C3C5AF9C27602A3C00178E4E /* Preview Content */,
@@ -241,6 +233,43 @@
 				C3C5AF9D27602A3C00178E4E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C3CDF27627755557006B00FF /* password_generation */ = {
+			isa = PBXGroup;
+			children = (
+				C3BBCCC52766CC0B00AB3F2F /* password_gen.swift */,
+				C3BBCCC72766CC0E00AB3F2F /* password_gen_helper.swift */,
+				C3CDF2772775556B006B00FF /* word_handling */,
+			);
+			path = password_generation;
+			sourceTree = "<group>";
+		};
+		C3CDF2772775556B006B00FF /* word_handling */ = {
+			isa = PBXGroup;
+			children = (
+				C3BBCCC12766CB9B00AB3F2F /* word_index_handler.swift */,
+				C3BBCCC32766CBFD00AB3F2F /* word_index.swift */,
+				C3D976D927674AE1003CE09D /* words */,
+			);
+			path = word_handling;
+			sourceTree = "<group>";
+		};
+		C3CDF27827755579006B00FF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C306CE6C2770F26C00102885 /* StepperViewModel.swift */,
+				C3831DC5277294FC00CE382C /* LanguageViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C3CDF27927755587006B00FF /* Additional_Views */ = {
+			isa = PBXGroup;
+			children = (
+				C3C3F1B8276C1C06004C0261 /* LanguageChooser.swift */,
+			);
+			path = Additional_Views;
 			sourceTree = "<group>";
 		};
 		C3D976D927674AE1003CE09D /* words */ = {
@@ -492,7 +521,6 @@
 				C3BBCCC42766CBFD00AB3F2F /* word_index.swift in Sources */,
 				C3C5AF9727602A3B00178E4E /* wordPassApp.swift in Sources */,
 				C3C3F1B9276C1C06004C0261 /* LanguageChooser.swift in Sources */,
-				C3A7641A27720FCF00103870 /* Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
