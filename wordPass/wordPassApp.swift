@@ -25,6 +25,17 @@ struct NewUIApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .onAppear {
+                    // Disable fullscreen button
+                    let _ = NSApplication.shared.windows.map({
+                        $0.styleMask = [.titled, .closable, .miniaturizable]
+                    })
+                    
+                    let menu = NSMenu()
+                    menu.addItem(withTitle: "test", action: nil, keyEquivalent: "test")
+                    NSApplication.shared.mainMenu = menu
+                    
+                }
         }
     }
 }
@@ -33,8 +44,8 @@ struct OldUIApp {
     static func main() {
         NSApplication.shared.setActivationPolicy(.regular)
         
-       let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
-       nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
+        let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
+        nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
         
         NSApp.delegate = appDelegate
         NSApp.activate(ignoringOtherApps: true)

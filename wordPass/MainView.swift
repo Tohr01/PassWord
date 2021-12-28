@@ -18,22 +18,25 @@ struct MainView: View {
     
     // Language selection
     @ObservedObject var lang_model = LanguageViewModel()
-    @State var opacity_language_chooser = 1.0
-    @State var viewLoaded : Bool = false
+    
+    // Base settings
+    @State var show_settings: Bool = false
+    @State var equal_words: Bool = true
+    @State var limit_chars: Bool = true
     
     // Button background opacities
     @State var opacity_generate_new_button = 0.1
     @State var opacity_minus_button = 0.0
     @State var opacity_plus_button = 0.0
-    @State var opacity_language_button = 0.1
+    @State var opacity_settings_button = 0.1
     @State var opacity_copy_buttom = 0.1
     
     func initView() {
         var index : [Int : String] = word_index_english
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
+            print(lang)
             lang_model.lang_set = true
             lang_model.current_lang = lang
-            opacity_language_chooser = 0.0
             switch lang {
             case "de":
                 index = word_index_german
@@ -44,24 +47,30 @@ struct MainView: View {
                 lang_model.lang_set = false
             }
         }
+        if let equal_words = UserDefaults.standard.value(forKey: "equal_words") as? Bool {
+            self.equal_words = equal_words
+        }
+        if let limit_chars = UserDefaults.standard.value(forKey: "limit_chars") as? Bool {
+            self.limit_chars = limit_chars
+        }
         
         handler = word_handler(index: index)
         
         if let generated_password = genPass(targetLength: stepper_model.value, handler: handler), let maxLength = handler.getMaximumDefaultLength(), let minLength = handler.getMinimumDefaultLength() {
+            print("reached")
             current_password = generated_password
             print(minLength, maxLength)
             stepper_model.value = 15
             stepper_model.min_value = minLength - 1
-            stepper_model.max_value = maxLength
+            stepper_model.max_value = limit_chars ? 31 : maxLength
         }
-        viewLoaded = true
     }
     
     func easy_gen_pass() {
         // Get current length
         let length = stepper_model.value
 #warning("settings for even words")
-        if let new_pw = genPass(targetLength: length, handler: handler, evenWords: true) {
+        if let new_pw = genPass(targetLength: length, handler: handler, evenWords: equal_words) {
             current_password = new_pw
         }
     }
@@ -226,57 +235,38 @@ struct MainView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .frame(height: 40)
                     
-                    // MARK: Change language
-                    // Change language button
+                    // MARK: Settings
                     Button {
-                        opacity_language_chooser = 1.0
-                        lang_model.lang_set = false
+                        self.show_settings.toggle()
                     } label: {
-                        Image("globe")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaleEffect(0.7)
-                            .opacity(0.5)
-                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                            Image("gear")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .scaleEffect(0.7)
+                                .opacity(0.5)
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                    }
+                    .popover(isPresented: $show_settings, arrowEdge: .bottom) {
+                        SettingsView(current_language: $lang_model.current_lang.onChange({ _ in
+                            initView()
+                        }), equal_words: $equal_words.onChange({ _ in
+                            easy_gen_pass()
+                        }), limit_chars: $limit_chars.onChange({ _ in
+                            stepper_model.value = 15
+                            initView()
+                        }))
                     }
                     .buttonStyle(PlainButtonStyle())
                     .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                     .frame(width: 40, height: 40)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_language_button))
-                    .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onChanged({ _ in
-                        self.opacity_language_button = 0.2
-                    })
-                                            .onEnded({ _ in
-                        self.opacity_language_button = 0.1
-                    }))
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_settings_button))
+                    
+                   
 
                 }
             }
             .padding()
             .zIndex(1)
-            
-            // MARK: Language Chooser
-            // Checks if view settings initialized then adds LanguageChooser
-            if viewLoaded {
-                if #available(macOS 11.0, *) {
-                    LanguageChooser(opacity: $opacity_language_chooser, current_language: $lang_model.current_lang)
-                        .frame(minWidth: 470, idealWidth: 470, maxWidth: 800, minHeight: 125, idealHeight: 125, maxHeight: 150)
-                        .zIndex(2)
-                        .onChange(of: lang_model.current_lang) { _ in
-                            initView()
-                        }
-                } else {
-                    // Fallback on earlier versions
-                    LanguageChooser(opacity: $opacity_language_chooser, current_language: $lang_model.current_lang)
-                        .onReceive(Just(lang_model.current_lang)) { _ in
-                            if lang_model.old_lang != lang_model.current_lang {
-                                initView()
-                            }
-                        }
-                        .zIndex(2)
-                }
-            }
         }
         .frame(minWidth: 470, idealWidth: 470, maxWidth: 800, minHeight: 125, idealHeight: 125, maxHeight: 150)
         .onAppear {
