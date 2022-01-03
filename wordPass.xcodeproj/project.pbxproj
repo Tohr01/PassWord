@@ -10,6 +10,7 @@
 		C306CE6D2770F26C00102885 /* StepperViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C306CE6C2770F26C00102885 /* StepperViewModel.swift */; };
 		C34D6E47277A690700685B8B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34D6E46277A690600685B8B /* SettingsView.swift */; };
 		C3831DC6277294FC00CE382C /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3831DC5277294FC00CE382C /* LanguageViewModel.swift */; };
+		C395A1F8278268E900479CE0 /* EmptyCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = C395A1F7278268E900479CE0 /* EmptyCommands.swift */; };
 		C3A763F92771FFB200103870 /* 27-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763DB2771FFB000103870 /* 27-eng.wordpass */; };
 		C3A763FA2771FFB200103870 /* 16-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763DC2771FFB000103870 /* 16-eng.wordpass */; };
 		C3A763FB2771FFB200103870 /* 6-eng.wordpass in Resources */ = {isa = PBXBuildFile; fileRef = C3A763DD2771FFB000103870 /* 6-eng.wordpass */; };
@@ -101,6 +102,7 @@
 		C306CE6C2770F26C00102885 /* StepperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperViewModel.swift; sourceTree = "<group>"; };
 		C34D6E46277A690600685B8B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C3831DC5277294FC00CE382C /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
+		C395A1F7278268E900479CE0 /* EmptyCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCommands.swift; sourceTree = "<group>"; };
 		C3A763DB2771FFB000103870 /* 27-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "27-eng.wordpass"; sourceTree = "<group>"; };
 		C3A763DC2771FFB000103870 /* 16-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "16-eng.wordpass"; sourceTree = "<group>"; };
 		C3A763DD2771FFB000103870 /* 6-eng.wordpass */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "6-eng.wordpass"; sourceTree = "<group>"; };
@@ -277,6 +279,7 @@
 				C34D6E46277A690600685B8B /* SettingsView.swift */,
 				C3D1B4C7277B66260032F705 /* Extentions.swift */,
 				C3C3F1B8276C1C06004C0261 /* LanguageChooser.swift */,
+				C395A1F7278268E900479CE0 /* EmptyCommands.swift */,
 			);
 			path = Additional_Views;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				C3BBCCC42766CBFD00AB3F2F /* word_index.swift in Sources */,
 				C3C5AF9727602A3B00178E4E /* wordPassApp.swift in Sources */,
 				C3C3F1B9276C1C06004C0261 /* LanguageChooser.swift in Sources */,
+				C395A1F8278268E900479CE0 /* EmptyCommands.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-var appDelegate = AppDelegate()
+var appDelegate = OldAppDelegate()
 
 @main
 struct AppUISelector {
@@ -22,20 +22,14 @@ struct AppUISelector {
 
 @available(macOS 11.0, *)
 struct NewUIApp: App {
+    @NSApplicationDelegateAdaptor(NewAppDelegate.self) var app_delegate
+    
     var body: some Scene {
         WindowGroup {
             MainView()
-                .onAppear {
-                    // Disable fullscreen button
-                    let _ = NSApplication.shared.windows.map({
-                        $0.styleMask = [.titled, .closable, .miniaturizable]
-                    })
-                    
-                    let menu = NSMenu()
-                    menu.addItem(withTitle: "test", action: nil, keyEquivalent: "test")
-                    NSApplication.shared.mainMenu = menu
-                    
-                }
+        }
+        .commands {
+            EmptyCommands()
         }
     }
 }
@@ -53,7 +47,23 @@ struct OldUIApp {
     }
 }
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+class NewAppDelegate: NSObject, NSApplicationDelegate {
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        let _ = NSApplication.shared.windows.map({
+            $0.tabbingMode = .disallowed
+            $0.styleMask = [.titled, .closable, .miniaturizable]
+        }
+        )
+        
+        let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
+        nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
+        //if let menu = NSApplication.shared.menu, let appname = Bundle.main.infoDictionary!["CFBundleName"] as? String {
+        //    menu.items = menu.items.filter({$0.title == appname})
+        //}
+    }
+}
+
+class OldAppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     
     func applicationDidFinishLaunching(_ notification: Notification) {
