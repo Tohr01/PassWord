@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Combine
 
 struct MainView: View {
     // Current password
@@ -24,12 +23,13 @@ struct MainView: View {
     @State var equal_words: Bool = true
     @State var limit_chars: Bool = true
     
-    // Button background opacities
-    @State var opacity_generate_new_button = 0.1
-    @State var opacity_minus_button = 0.0
-    @State var opacity_plus_button = 0.0
-    @State var opacity_settings_button = 0.1
-    @State var opacity_copy_buttom = 0.1
+    // Scalings
+    @State private var scale_copy: CGFloat = 1
+    @State private var scale_generate_new: CGFloat = 1
+    @State private var scale_minus: CGFloat = 1
+    @State private var scale_plus: CGFloat = 1
+    @State private var scale_settings: CGFloat = 1
+    
     
     func initView() {
         var index : [Int : String] = word_index_english
@@ -69,206 +69,225 @@ struct MainView: View {
     func easy_gen_pass() {
         // Get current length
         let length = stepper_model.value
-#warning("settings for even words")
         if let new_pw = genPass(targetLength: length, handler: handler, evenWords: equal_words) {
             current_password = new_pw
         }
     }
     
     var body: some View {
-        ZStack {
-            // MARK: Main Generator
-            VStack(spacing: 10.0) {
-                ///# Password row
-                HStack {
-                    // MARK: Password field
-                    HStack {
-                        Image("key")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 20)
-                            .foregroundColor(Color("default_appearance"))
-                        TextField(lang_model.current_lang == "de" ? "Generiertes Passwort" : "Generated password", text: $current_password)
-                            .textFieldStyle(PlainTextFieldStyle())
-                            .font(.system(size: 15, weight: .semibold, design: .monospaced))
-                            .truncationMode(.tail)
-                            .focusable(false)
-                        
-                    }.frame(height: 40)
-                        .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
-                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
-                        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Color("default_appearance"), lineWidth: 2))
-                    
-                    // MARK: Copy to clipboard button
-                    Button {
-                        let pasteboard = NSPasteboard.general
-                        pasteboard.declareTypes([.string], owner: nil)
-                        pasteboard.setString(current_password, forType: .string)
-                    } label: {
-                        Image("doc.on.doc")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaleEffect(0.7)
-                            .foregroundColor(Color("default_appearance"))
-                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .aspectRatio(CGSize(width: 1, height: 1) ,contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                    .opacity(0.5)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_copy_buttom))
-                    .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onChanged({ _ in
-                        self.opacity_copy_buttom = 0.2
-                    })
-                                            .onEnded({ _ in
-                        self.opacity_copy_buttom = 0.1
-                    }))
-                }
-                
-                ///# Button row
-                HStack {
-                    // MARK: Generate new password
-                    HStack {
-                        Spacer()
-                        Image("arrow.clockwise")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 20)
-                            .foregroundColor(Color("default_appearance"))
-                        Text(lang_model.current_lang == "de" ? "Neu generieren" : "Generate new")
-                            .font(.system(size: 15, weight: .semibold, design: .monospaced))
-                            .truncationMode(.tail)
-                        Spacer()
-                    }
-                    .padding()
-                    .frame(height: 40)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_generate_new_button))
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .onTapGesture(perform: {
-                        easy_gen_pass()
-                    })
-                    .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                            .onChanged({ _ in
-                        self.opacity_generate_new_button = 0.2
-                    })
-                                            .onEnded({ _ in
-                        self.opacity_generate_new_button  = 0.1
-                    }))
-                    
-                    // MARK: Custom stepper
-                    // Increase word length button
-                    HStack {
-                        Image("minus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaleEffect(0.5)
-                            .frame(width: 40, height: 40)
-                            .contentShape(Rectangle())
-                            .overlay(RoundedRectangle(cornerRadius: 0).fill(Color("default_appearance").opacity(opacity_minus_button)))
-                            .onTapGesture(perform: {
-                                self.stepper_model.increase = false
-                                self.stepper_model.increaseValue()
-                                easy_gen_pass()
-                            })
-                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                        .onChanged({ _ in
-                                self.opacity_minus_button = 0.2
-                                self.stepper_model.increase = false
-                                self.stepper_model.start()
-                            })
-                                        .onEnded({ _ in
-                                opacity_minus_button = 0.1
-                                self.stepper_model.stop()
-                                easy_gen_pass()
-                            })
-                            )
-                            .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                                    .onChanged({ _handler in
-                                self.opacity_minus_button = 0.1
-                            })
-                                                    .onEnded({ _ in
-                                self.opacity_minus_button = 0.0
-                            })
-                            )
-                        
-                        Text(String(stepper_model.value))
-                            .font(.system(size: 15, weight: .medium, design: .monospaced))
-                            .padding()
-                        
-                        Image("plus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .scaleEffect(0.5)
-                            .frame(width: 40, height: 40)
-                            .contentShape(Rectangle())
-                            .overlay(RoundedRectangle(cornerRadius: 0).fill(Color("default_appearance").opacity(opacity_plus_button)))
-                            .onTapGesture(perform: {
-                                self.stepper_model.increase = true
-                                self.stepper_model.increaseValue()
-                                easy_gen_pass()
-                            })
-                            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                        .onChanged({ _ in
-                                self.stepper_model.increase = true
-                                self.stepper_model.start()
-                            })
-                                        .onEnded({ _ in
-                                self.opacity_plus_button = 0.0
-                                self.stepper_model.stop()
-                                easy_gen_pass()
-                            })
-                            )
-                            .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                                    .onChanged({ _handler in
-                                self.opacity_plus_button = 0.1
-                            })
-                                                    .onEnded({ _ in
-                                self.opacity_plus_button = 0.0
-                            })
-                            )
-                    }
-                    .padding(.leading, 1)
-                    .padding(.trailing, 1)
-                    .frame(height: 40)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(0.1))
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-                    .frame(height: 40)
-                    
-                    // MARK: Settings
-                    Button {
-                        self.show_settings.toggle()
-                    } label: {
-                            Image("gear")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .scaleEffect(0.7)
-                                .opacity(0.5)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                    }
-                    .popover(isPresented: $show_settings, arrowEdge: .bottom) {
-                        SettingsView(current_language: $lang_model.current_lang.onChange({ _ in
-                            initView()
-                        }), equal_words: $equal_words.onChange({ _ in
-                            easy_gen_pass()
-                        }), limit_chars: $limit_chars.onChange({ _ in
-                            stepper_model.value = 15
-                            initView()
-                        }))
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                    .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
-                    .frame(width: 40, height: 40)
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_appearance")).opacity(opacity_settings_button))
-                    
-                   
-
-                }
+        
+        // MARK: Main Generator
+        VStack(spacing: 10.0) {
+            // MARK: Logo
+            HStack {
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                Spacer()
             }
-            .padding()
-            .zIndex(1)
+            .frame(height: 30)
+            ///# Password row
+            HStack {
+                // MARK: Password field
+                HStack {
+                    Image("key")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 20)
+                        .foregroundColor(Color("default_fg_important"))
+                    TextField(lang_model.current_lang == "de" ? "Generiertes Passwort" : "Generated password", text: $current_password)
+                        .textFieldStyle(PlainTextFieldStyle())
+                        .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                        .truncationMode(.tail)
+                        .focusable(false)
+                    
+                }
+                .frame(height: 40)
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
+                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Color("default_fg_important"), lineWidth: 1))
+                
+                // MARK: Copy to clipboard button
+                Button {
+                    let pasteboard = NSPasteboard.general
+                    pasteboard.declareTypes([.string], owner: nil)
+                    pasteboard.setString(current_password, forType: .string)
+                } label: {
+                    Image("doc.on.doc")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .scaleEffect(0.7)
+                        .foregroundColor(Color("default_fg_important"))
+                }
+                .buttonStyle(PlainButtonStyle())
+                .aspectRatio(CGSize(width: 1, height: 1) ,contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
+                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .scaleEffect(scale_copy)
+                .animation(Animation.easeInOut, value: scale_copy)
+                
+                .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                        .onChanged({ _ in
+                    scale_copy = 0.8
+                })
+                                        .onEnded({ _ in
+                    scale_copy = 1
+                }))
+            }
+            
+            ///# Button row
+            HStack {
+                // MARK: Generate new password
+                HStack {
+                    Spacer()
+                    Image("arrow.clockwise")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 20)
+                    Text(lang_model.current_lang == "de" ? "Neu generieren" : "Generate new")
+                        .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                        .truncationMode(.tail)
+                    Spacer()
+                }
+                .foregroundColor(Color("default_fg"))
+                .padding()
+                .frame(height: 40)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
+                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .scaleEffect(scale_generate_new)
+                .animation(Animation.easeInOut, value: scale_generate_new)
+                .onTapGesture(perform: {
+                    easy_gen_pass()
+                })
+                .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                        .onChanged({ _ in
+                    scale_generate_new = 0.8
+                })
+                                        .onEnded({ _ in
+                    scale_generate_new = 1
+                }))
+                
+                // MARK: Custom stepper
+                // Increase word length button
+                HStack {
+                    Image("minus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .scaleEffect(0.5)
+                        .frame(width: 40, height: 40)
+                        .contentShape(Rectangle())
+                        .scaleEffect(scale_minus)
+                        .animation(Animation.easeInOut, value: scale_minus)
+                        .onTapGesture(perform: {
+                            self.stepper_model.increase = false
+                            self.stepper_model.increaseValue()
+                            easy_gen_pass()
+                        })
+                        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                    .onChanged({ _ in
+                            
+                            self.stepper_model.increase = false
+                            self.stepper_model.start()
+                        })
+                                    .onEnded({ _ in
+                            
+                            self.stepper_model.stop()
+                            easy_gen_pass()
+                        })
+                        )
+                        .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                                .onChanged({ _handler in
+                            scale_minus = 1.2
+                        })
+                                                .onEnded({ _ in
+                            scale_minus = 1
+                        })
+                        )
+                    
+                    Text(String(stepper_model.value))
+                        .font(.system(size: 15, weight: .medium, design: .monospaced))
+                        .padding()
+                    
+                    Image("plus")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .scaleEffect(0.5)
+                        .frame(width: 40, height: 40)
+                        .contentShape(Rectangle())
+                        .scaleEffect(scale_plus)
+                        .animation(Animation.easeInOut, value: scale_plus)
+                        .onTapGesture(perform: {
+                            self.stepper_model.increase = true
+                            self.stepper_model.increaseValue()
+                            easy_gen_pass()
+                        })
+                        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                    .onChanged({ _ in
+                            self.stepper_model.increase = true
+                            self.stepper_model.start()
+                        })
+                                    .onEnded({ _ in
+                            
+                            self.stepper_model.stop()
+                            easy_gen_pass()
+                        })
+                        )
+                        .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                                .onChanged({ _handler in
+                            scale_plus = 1.2
+                        })
+                                                .onEnded({ _ in
+                            scale_plus = 1
+                        })
+                        )
+                }
+                .padding(.leading, 1)
+                .padding(.trailing, 1)
+                .frame(height: 40)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
+                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                
+                // MARK: Settings
+                Button {
+                    self.show_settings.toggle()
+                } label: {
+                    Image("gearshape")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .scaleEffect(0.7)
+                        .foregroundColor(Color("default_fg"))
+                }
+                .popover(isPresented: $show_settings, arrowEdge: .bottom) {
+                    SettingsView(current_language: $lang_model.current_lang.onChange({ _ in
+                        initView()
+                    }), equal_words: $equal_words.onChange({ _ in
+                        easy_gen_pass()
+                    }), limit_chars: $limit_chars.onChange({ _ in
+                        stepper_model.value = 15
+                        initView()
+                    }))
+                }
+                .buttonStyle(PlainButtonStyle())
+                .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
+                .frame(width: 40, height: 40)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
+                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .scaleEffect(scale_settings)
+                .animation(Animation.easeInOut, value: scale_settings)
+                .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                        .onChanged({ _handler in
+                    scale_settings = 0.8
+                })
+                                        .onEnded({ _ in
+                    scale_settings = 1
+                })
+                )
+            }
         }
-        .frame(minWidth: 470, idealWidth: 470, maxWidth: 800, minHeight: 125, idealHeight: 125, maxHeight: 150)
+        .padding()
+        .zIndex(1)
+        .frame(minWidth: 470, idealWidth: 470, maxWidth: 750, minHeight: 170, maxHeight: 170)
         .onAppear {
             initView()
         }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "gear.png",
+      "filename" : "gearshape.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "gear@2x.png",
+      "filename" : "gearshape@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "gear@3x.png",
+      "filename" : "gearshape@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

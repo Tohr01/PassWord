@@ -51,7 +51,7 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         let _ = NSApplication.shared.windows.map({
             $0.tabbingMode = .disallowed
-            $0.styleMask = [.titled, .closable, .miniaturizable]
+            $0.styleMask = [.titled, .closable, .miniaturizable, .resizable]
         }
         )
         
