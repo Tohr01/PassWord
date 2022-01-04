@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 08.12.21.
 //

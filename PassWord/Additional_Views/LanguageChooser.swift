@@ -1,6 +1,6 @@
 //
 //  LanguageChooser.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 17.12.21.
 //

@@ -1,6 +1,6 @@
 //
 //  word_index_handler.swift
-//  wordPass-algorithm
+//  PassWord-algorithm
 //
 //  Created by Carl Raabe on 10.12.21.
 //

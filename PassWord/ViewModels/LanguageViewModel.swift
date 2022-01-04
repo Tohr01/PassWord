@@ -1,6 +1,6 @@
 //
 //  LanguageViewModel.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 22.12.21.
 //

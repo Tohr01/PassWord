@@ -1,6 +1,6 @@
 //
 //  SettingsView.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 27.12.21.
 //
@@ -29,22 +29,22 @@ struct SettingsView: View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading) {
                 // MARK: Language selection
-                Text("Language selection: ")
+                Text(current_language == "eng" ? "Language selection:" : "Sprachauswahl:")
                     .font(.headline)
                 Picker(selection: $selected_language_index.onChange({ _ in
                     let new_lang = languages[selected_language_index].language_identifier
                     
                     UserDefaults.standard.set(new_lang, forKey: "lang")
                     current_language = new_lang
-                })) {
-                    ForEach(0..<self.languages.count) { index in
-                        Text(self.languages[index].language_display_name)
-                    }
-                } label: {}
+                }), content: {
+                        ForEach(0..<self.languages.count) { index in
+                            Text(self.languages[index].language_display_name)
+                        }
+                }, label: {})
                 
                 Divider()
                 
-                Text("Password settings: ")
+                Text(current_language == "eng" ? "Password settings:" : "Passworteinstellungen")
                     .font(.headline)
                 
                 // MARK: Equal word length selection
@@ -53,7 +53,7 @@ struct SettingsView: View {
                 }), label: {
                     Text("Equal word selection")
                 })
-                Text("The password generator will try to select two words with the same length. Otherwise two words with a random length will be selected.")
+                Text(current_language == "eng" ? "The password generator will try to select two words with the same length." : "Der Passwortgenerator versucht, zwei Wörter mit der gleichen Länge auszuwählen.")
                     .font(.footnote)
                     .opacity(0.7)
                     .fixedSize(horizontal: false, vertical: true)
@@ -66,9 +66,9 @@ struct SettingsView: View {
                     UserDefaults.standard.set(limit_chars_wrapper, forKey: "limit_chars")
                     limit_chars = limit_chars
                 })) {
-                    Text("Limit maximal word length")
+                    Text(current_language == "eng" ? "Limit maximal password length" : "Maximale Passwortlänge begrenzen")
                 }
-                Text("Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option.")
+                Text(current_language == "eng" ? "Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option." : "Begrenzt die maximale Wortlänge auf einen Standardwert von 31 Zeichen. Wenn Sie längere Passwörter generieren möchten, deaktivieren Sie diese Option.")
                     .font(.footnote)
                     .opacity(0.7)
                     .fixedSize(horizontal: false, vertical: true)

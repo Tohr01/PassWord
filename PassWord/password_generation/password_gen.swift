@@ -1,6 +1,6 @@
 //
 //  password_gen.swift
-//  wordPass-algorithm
+//  PassWord-algorithm
 //
 //  Created by Carl Raabe on 13.12.21.
 //

@@ -1,6 +1,6 @@
 //
-//  wordPassApp.swift
-//  wordPass
+//  PassWordApp.swift
+//  PassWord
 //
 //  Created by Carl Raabe on 08.12.21.
 //

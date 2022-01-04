@@ -1,6 +1,6 @@
 //
 //  EmptyCommands.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 03.01.22.
 //

@@ -1,6 +1,6 @@
 //
 //  Extentions.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 28.12.21.
 //

@@ -1,6 +1,6 @@
 //
 //  SwiftUIView.swift
-//  wordPass
+//  PassWord
 //
 //  Created by Carl Raabe on 20.12.21.
 //
