@@ -28,9 +28,6 @@ struct NewUIApp: App {
         WindowGroup {
             MainView()
         }
-        .commands {
-            EmptyCommands()
-        }
     }
 }
 
@@ -57,9 +54,6 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
         
         let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
         nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
-        //if let menu = NSApplication.shared.menu, let appname = Bundle.main.infoDictionary!["CFBundleName"] as? String {
-        //    menu.items = menu.items.filter({$0.title == appname})
-        //}
     }
 }
 
