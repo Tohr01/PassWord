@@ -8,37 +8,35 @@
 import SwiftUI
 
 struct AboutView: View {
-    
-    @State var current_lang : String = "eng"
-    @State var current_version : String = "1.0"
+    @State var current_lang: String = "eng"
+    @State var current_version: String = "1.0"
     private func initView() {
-        if let current_language = UserDefaults.standard.value(forKey: "lang") as? String{
-            self.current_lang = current_language
+        if let current_language = UserDefaults.standard.value(forKey: "lang") as? String {
+            current_lang = current_language
         }
         if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            self.current_version = appVersion
+            current_version = appVersion
         }
     }
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Image("logo")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             Text("Version: \(current_version)")
-            
-            
+
             HStack {
                 Image("hammer")
                     .resizable()
-                    .aspectRatio( contentMode: .fit)
+                    .aspectRatio(contentMode: .fit)
                     .frame(height: 30)
                     .foregroundColor(Color("default_fg"))
                 Divider()
                 VStack(alignment: .leading) {
                     Text("Carl Raabe")
                         .font(.headline)
-                    
+
                     Text("Developer")
                         .font(.footnote)
                         .opacity(0.7)

@@ -42,9 +42,9 @@ class word_handler {
 
     /**
      Looks up filename for given word length in index
-     
+
      - Parameter word_length: The word length
-     
+
      - Returns: The filename; If entry not found returns nil
      */
     func getFileName(for word_length: Int) -> String? {
@@ -78,9 +78,9 @@ class word_handler {
 
     /**
      Returns given string seperated new lines
-     
+
      - Parameter str: The String
-     
+
      - Returns: The original String split into its words
      */
     func splitToWords(str: String) -> [String] {
@@ -117,7 +117,7 @@ class word_handler {
         }
         return nil
     }
-    
+
     func getMaximumDefaultLength() -> Int? {
         if let maximum_word_length = getAvaiableWordLengths().max() {
             return maximum_word_length * 2 + 3

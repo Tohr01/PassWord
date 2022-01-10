@@ -14,6 +14,7 @@ extension Binding {
             set: { selec in
                 self.wrappedValue = selec
                 handler(selec)
-        })
+            }
+        )
     }
 }

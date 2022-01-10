@@ -14,7 +14,7 @@ func genRandomSpecialChar() -> String {
     return special_chars[Int(randomNum)]
 }
 
-func getWordComposition(in letter_count_list: [Int], targetLength: Int, evenWords : Bool) -> (Int, Int)? {
+func getWordComposition(in letter_count_list: [Int], targetLength: Int, evenWords: Bool) -> (Int, Int)? {
     if evenWords {
         // Returns a tuple of two preferrably even numbers if possible
         let preffered_length_word_1 = targetLength / 2
@@ -58,7 +58,7 @@ func lowercaseFirstLetter(str: String) -> String {
 func sort(arr: [Int], smallest_value: Int) -> [Int] {
     // [2,3,5,4,6,7,8] 3
     // [4,5,6,7,8,2,3]
-    let high_val_arr = arr.filter({$0 > smallest_value})
-    let small_val_arr = arr.filter({$0 <= smallest_value})
+    let high_val_arr = arr.filter { $0 > smallest_value }
+    let small_val_arr = arr.filter { $0 <= smallest_value }
     return high_val_arr + small_val_arr
 }

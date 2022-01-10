@@ -14,10 +14,10 @@ import Foundation
 
  - Parameter targetLength: The length of the password
  - Parameter evenWords: When set to true: The generator will try to generate a wordpair with evenly distributed letter count
- 
+
  - Returns: The password or nil if targetLength is too short or a if an error occurred
  */
-func genPass(targetLength: Int, handler: word_handler, evenWords : Bool = true) -> String? {
+func genPass(targetLength: Int, handler: word_handler, evenWords: Bool = true) -> String? {
     let words = handler
 
     // The number included in the password (X)
@@ -26,17 +26,17 @@ func genPass(targetLength: Int, handler: word_handler, evenWords : Bool = true) 
     if let minimum_password_length = words.getMinimumDefaultLength(), let maximum_password_length = words.getMaximumDefaultLength() {
         if minimum_password_length > targetLength {
             // The number ranging from 0 - 10 if targetLength is lower than minimum_password_length
-            number = Int.random(in: 0..<10)
+            number = Int.random(in: 0 ..< 10)
         } else if maximum_password_length == targetLength {
-            number = Int.random(in: 10..<100)
+            number = Int.random(in: 10 ..< 100)
         } else {
             // The number ranging from 0 - 99 if targetLength is higher than minimum_password_length
-            number = Int.random(in: 0..<100)
+            number = Int.random(in: 0 ..< 100)
         }
     } else {
         return nil
     }
-    
+
     // The special character
     let special_char = genRandomSpecialChar()
     // Total word length of the two words without the number or the special character

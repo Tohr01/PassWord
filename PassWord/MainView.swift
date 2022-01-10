@@ -10,29 +10,28 @@ import SwiftUI
 struct MainView: View {
     // Current password
     @State var current_password: String = ""
-    @State var handler: word_handler = word_handler(index: word_index_english)
-    
+    @State var handler: word_handler = .init(index: word_index_english)
+
     // Increase or decrease word length
-    @ObservedObject var stepper_model : StepperViewModel = StepperViewModel(start_val: 15, min_value: 6, max_value: 31)
-    
+    @ObservedObject var stepper_model: StepperViewModel = .init(start_val: 15, min_value: 6, max_value: 31)
+
     // Language selection
     @ObservedObject var lang_model = LanguageViewModel()
-    
+
     // Base settings
     @State var show_settings: Bool = false
     @State var equal_words: Bool = true
     @State var limit_chars: Bool = true
-    
+
     // Scalings
     @State private var scale_copy: CGFloat = 1
     @State private var scale_generate_new: CGFloat = 1
     @State private var scale_minus: CGFloat = 1
     @State private var scale_plus: CGFloat = 1
     @State private var scale_settings: CGFloat = 1
-    
-    
+
     func initView() {
-        var index : [Int : String] = word_index_english
+        var index: [Int: String] = word_index_english
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
             print(lang)
             lang_model.lang_set = true
@@ -53,9 +52,9 @@ struct MainView: View {
         if let limit_chars = UserDefaults.standard.value(forKey: "limit_chars") as? Bool {
             self.limit_chars = limit_chars
         }
-        
+
         handler = word_handler(index: index)
-        
+
         if let generated_password = genPass(targetLength: stepper_model.value, handler: handler), let maxLength = handler.getMaximumDefaultLength(), let minLength = handler.getMinimumDefaultLength() {
             print("reached")
             current_password = generated_password
@@ -65,7 +64,7 @@ struct MainView: View {
             stepper_model.max_value = limit_chars ? 31 : maxLength
         }
     }
-    
+
     func easy_gen_pass() {
         // Get current length
         let length = stepper_model.value
@@ -73,12 +72,13 @@ struct MainView: View {
             current_password = new_pw
         }
     }
-    
+
     var body: some View {
-        
         // MARK: Main Generator
+
         VStack(spacing: 10.0) {
             // MARK: Logo
+
             HStack {
                 Image("logo")
                     .resizable()
@@ -86,9 +86,10 @@ struct MainView: View {
                 Spacer()
             }
             .frame(height: 30)
-            ///# Password row
+            /// # Password row
             HStack {
                 // MARK: Password field
+
                 HStack {
                     Image("key")
                         .resizable()
@@ -100,14 +101,14 @@ struct MainView: View {
                         .font(.system(size: 15, weight: .semibold, design: .monospaced))
                         .truncationMode(.tail)
                         .focusable(false)
-                    
                 }
                 .frame(height: 40)
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 0))
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .circular))
                 .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(Color("default_fg_important"), lineWidth: 1))
-                
+
                 // MARK: Copy to clipboard button
+
                 Button {
                     let pasteboard = NSPasteboard.general
                     pasteboard.declareTypes([.string], owner: nil)
@@ -120,25 +121,26 @@ struct MainView: View {
                         .foregroundColor(Color("default_fg_important"))
                 }
                 .buttonStyle(PlainButtonStyle())
-                .aspectRatio(CGSize(width: 1, height: 1) ,contentMode: .fit)
+                .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                 .frame(width: 40, height: 40)
                 .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
-                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
+                    .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_copy)
                 .animation(Animation.easeInOut, value: scale_copy)
-                
+
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                        .onChanged({ _ in
-                    scale_copy = 0.8
-                })
-                                        .onEnded({ _ in
-                    scale_copy = 1
-                }))
+                    .onChanged { _ in
+                        scale_copy = 0.8
+                    }
+                    .onEnded { _ in
+                        scale_copy = 1
+                    })
             }
-            
-            ///# Button row
+
+            /// # Button row
             HStack {
                 // MARK: Generate new password
+
                 HStack {
                     Spacer()
                     Image("arrow.clockwise")
@@ -154,21 +156,22 @@ struct MainView: View {
                 .padding()
                 .frame(height: 40)
                 .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
-                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
+                    .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_generate_new)
                 .animation(Animation.easeInOut, value: scale_generate_new)
                 .onTapGesture(perform: {
                     easy_gen_pass()
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                        .onChanged({ _ in
-                    scale_generate_new = 0.8
-                })
-                                        .onEnded({ _ in
-                    scale_generate_new = 1
-                }))
-                
+                    .onChanged { _ in
+                        scale_generate_new = 0.8
+                    }
+                    .onEnded { _ in
+                        scale_generate_new = 1
+                    })
+
                 // MARK: Custom stepper
+
                 // Increase word length button
                 HStack {
                     Image("minus")
@@ -185,30 +188,30 @@ struct MainView: View {
                             easy_gen_pass()
                         })
                         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                    .onChanged({ _ in
-                            
-                            self.stepper_model.increase = false
-                            self.stepper_model.start()
-                        })
-                                    .onEnded({ _ in
-                            
-                            self.stepper_model.stop()
-                            easy_gen_pass()
-                        })
+                            .onChanged { _ in
+
+                                self.stepper_model.increase = false
+                                self.stepper_model.start()
+                            }
+                            .onEnded { _ in
+
+                                self.stepper_model.stop()
+                                easy_gen_pass()
+                            }
                         )
                         .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                                .onChanged({ _handler in
-                            scale_minus = 1.2
-                        })
-                                                .onEnded({ _ in
-                            scale_minus = 1
-                        })
+                            .onChanged { _ in
+                                scale_minus = 1.2
+                            }
+                            .onEnded { _ in
+                                scale_minus = 1
+                            }
                         )
-                    
+
                     Text(String(stepper_model.value))
                         .font(.system(size: 15, weight: .medium, design: .monospaced))
                         .padding()
-                    
+
                     Image("plus")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -223,32 +226,33 @@ struct MainView: View {
                             easy_gen_pass()
                         })
                         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                    .onChanged({ _ in
-                            self.stepper_model.increase = true
-                            self.stepper_model.start()
-                        })
-                                    .onEnded({ _ in
-                            
-                            self.stepper_model.stop()
-                            easy_gen_pass()
-                        })
+                            .onChanged { _ in
+                                self.stepper_model.increase = true
+                                self.stepper_model.start()
+                            }
+                            .onEnded { _ in
+
+                                self.stepper_model.stop()
+                                easy_gen_pass()
+                            }
                         )
                         .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                                .onChanged({ _handler in
-                            scale_plus = 1.2
-                        })
-                                                .onEnded({ _ in
-                            scale_plus = 1
-                        })
+                            .onChanged { _ in
+                                scale_plus = 1.2
+                            }
+                            .onEnded { _ in
+                                scale_plus = 1
+                            }
                         )
                 }
                 .padding(.leading, 1)
                 .padding(.trailing, 1)
                 .frame(height: 40)
                 .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
-                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
-                
+                    .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
+
                 // MARK: Settings
+
                 Button {
                     self.show_settings.toggle()
                 } label: {
@@ -259,29 +263,29 @@ struct MainView: View {
                         .foregroundColor(Color("default_fg"))
                 }
                 .popover(isPresented: $show_settings, arrowEdge: .bottom) {
-                    SettingsView(current_language: $lang_model.current_lang.onChange({ _ in
+                    SettingsView(current_language: $lang_model.current_lang.onChange { _ in
                         initView()
-                    }), equal_words: $equal_words.onChange({ _ in
+                    }, equal_words: $equal_words.onChange { _ in
                         easy_gen_pass()
-                    }), limit_chars: $limit_chars.onChange({ _ in
+                    }, limit_chars: $limit_chars.onChange { _ in
                         stepper_model.value = 15
                         initView()
-                    }))
+                    })
                 }
                 .buttonStyle(PlainButtonStyle())
                 .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                 .frame(width: 40, height: 40)
                 .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
-                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
+                    .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_settings)
                 .animation(Animation.easeInOut, value: scale_settings)
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                                        .onChanged({ _handler in
-                    scale_settings = 0.8
-                })
-                                        .onEnded({ _ in
-                    scale_settings = 1
-                })
+                    .onChanged { _ in
+                        scale_settings = 0.8
+                    }
+                    .onEnded { _ in
+                        scale_settings = 1
+                    }
                 )
             }
         }
