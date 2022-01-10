@@ -122,8 +122,8 @@ struct MainView: View {
                 .buttonStyle(PlainButtonStyle())
                 .aspectRatio(CGSize(width: 1, height: 1) ,contentMode: .fit)
                 .frame(width: 40, height: 40)
-                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
-                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
+                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_copy)
                 .animation(Animation.easeInOut, value: scale_copy)
                 
@@ -153,8 +153,8 @@ struct MainView: View {
                 .foregroundColor(Color("default_fg"))
                 .padding()
                 .frame(height: 40)
-                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
-                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
+                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_generate_new)
                 .animation(Animation.easeInOut, value: scale_generate_new)
                 .onTapGesture(perform: {
@@ -245,8 +245,8 @@ struct MainView: View {
                 .padding(.leading, 1)
                 .padding(.trailing, 1)
                 .frame(height: 40)
-                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
-                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
+                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 
                 // MARK: Settings
                 Button {
@@ -271,8 +271,8 @@ struct MainView: View {
                 .buttonStyle(PlainButtonStyle())
                 .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                 .frame(width: 40, height: 40)
-                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg")))
-                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_bg"))
+                                .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_settings)
                 .animation(Animation.easeInOut, value: scale_settings)
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
