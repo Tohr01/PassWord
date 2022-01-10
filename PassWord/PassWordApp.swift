@@ -45,6 +45,13 @@ struct OldUIApp {
 }
 
 class NewAppDelegate: NSObject, NSApplicationDelegate {
+    var about_window: NSWindow!
+    
+    func applicationWillBecomeActive(_ notification: Notification) {
+        let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
+        nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
+    }
+    
     func applicationDidFinishLaunching(_ notification: Notification) {
         let _ = NSApplication.shared.windows.map({
             $0.tabbingMode = .disallowed
@@ -52,23 +59,36 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
         }
         )
         
-        let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
-        nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
+    }
+    
+    @IBAction func about(_ sender: Any) {
+        if about_window == nil || !about_window.isVisible {
+        about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+        
+        about_window.title = "PassWord - About"
+        about_window.isReleasedWhenClosed = false
+        about_window.center()
+        about_window.contentView = NSHostingView(rootView: AboutView())
+        about_window.makeKeyAndOrderFront(nil)
+        } else {
+            about_window.makeKeyAndOrderFront(nil)
+        }
     }
 }
 
+
 class OldAppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
+    var about_window: NSWindow!
     
     func applicationDidFinishLaunching(_ notification: Notification) {
         let contentView = MainView()
         
         window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .miniaturizable, .resizable], backing: .buffered, defer: false)
         
-        window.title = "Word Pass"
+        window.title = "PassWord"
         window.isReleasedWhenClosed = true
         window.center()
-        window.setFrameAutosaveName("Word Pass - Main")
         window.contentView = NSHostingView(rootView: contentView)
         window.makeKeyAndOrderFront(nil)
     }
@@ -76,5 +96,18 @@ class OldAppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         
     }
+    
+    @IBAction func about(_ sender: Any) {
+            if about_window == nil || !about_window.isVisible {
+            about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+            
+            about_window.title = "PassWord - About"
+            about_window.isReleasedWhenClosed = false
+            about_window.center()
+            about_window.contentView = NSHostingView(rootView: AboutView())
+            about_window.makeKeyAndOrderFront(nil)
+            } else {
+                about_window.makeKeyAndOrderFront(nil)
+            }
+    }
 }
-
