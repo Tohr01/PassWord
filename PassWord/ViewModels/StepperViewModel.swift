@@ -46,7 +46,7 @@ class StepperViewModel: ObservableObject {
     
     func increaseValue() {
         let new_val = value + (increase ? step_value : -step_value)
-        if new_val == min_value || new_val == max_value {
+        if new_val == min_value-1 || new_val == max_value+1 {
             stop()
         } else {
             value = new_val
