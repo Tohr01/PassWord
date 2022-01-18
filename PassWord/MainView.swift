@@ -252,7 +252,6 @@ struct MainView: View {
                     .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
 
                 // MARK: Settings
-
                 Button {
                     self.show_settings.toggle()
                 } label: {
