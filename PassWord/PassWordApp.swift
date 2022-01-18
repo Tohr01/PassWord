@@ -60,7 +60,7 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
         )
     }
 
-    @IBAction func about(_: Any) {
+    @IBAction func about(_ sender: Any) {
         if about_window == nil || !about_window.isVisible {
             about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
 
@@ -93,7 +93,7 @@ class OldAppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationWillTerminate(_: Notification) {}
 
-    @IBAction func about(_: Any) {
+    @IBAction func about(_ sender: Any) {
         if about_window == nil || !about_window.isVisible {
             about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
 

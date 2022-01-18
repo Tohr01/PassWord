@@ -18,10 +18,10 @@
                             <menuItem title="About PassWord" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="about:" target="-1" id="DgO-vP-x5f"/>
+                                    <action selector="about:" target="-1" id="Mcg-pf-Nns"/>
                                 </connections>
                             </menuItem>
-                            <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
+                            <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                             <menuItem title="Hide NewApplication" keyEquivalent="h" id="Olw-nP-bQN">
                                 <connections>
                                     <action selector="hide:" target="-1" id="PnN-Uc-m68"/>
@@ -40,7 +40,7 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
-                            <menuItem title="Quit PassWord" keyEquivalent="q" id="4sb-4s-VLi">
+                            <menuItem title="Quit NewApplication" keyEquivalent="q" id="4sb-4s-VLi">
                                 <connections>
                                     <action selector="terminate:" target="-1" id="Te7-pn-YzF"/>
                                 </connections>
@@ -48,8 +48,20 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Edit" id="5QF-Oa-p0T">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Edit" id="W48-6f-4Dl">
+                        <items>
+                            <menuItem title="Copy" keyEquivalent="c" id="x3v-GG-iWU">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="G1f-GL-Joy"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
             </items>
-            <point key="canvasLocation" x="-441" y="115"/>
+            <point key="canvasLocation" x="-156" y="146"/>
         </menu>
     </objects>
 </document>
