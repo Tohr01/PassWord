@@ -29,8 +29,9 @@ struct SettingsView: View {
         VStack(alignment: .leading) {
             // MARK: Language selection
 
-            Text(current_language == "en" ? "Language selection:" : "Sprachauswahl:")
+            Text("Password settings")
                 .font(.headline)
+            
             Picker(selection: $selected_language_index.onChange { _ in
                 let new_lang = languages[selected_language_index].language_identifier
 
@@ -41,20 +42,21 @@ struct SettingsView: View {
                     Text(self.languages[index].language_display_name)
                 }
             }, label: {})
-
+            Text("Choose a language for the words that make up the password.")
+                .font(.footnote)
+                .opacity(0.7)
+                .fixedSize(horizontal: false, vertical: true)
+            
             Divider()
-
-            Text(current_language == "en" ? "Password settings:" : "Passworteinstellungen")
-                .font(.headline)
-
+            
             // MARK: Equal word length selection
 
             Toggle(isOn: $equal_words.onChange { _ in
 
             }, label: {
-                Text("Equal word selection")
+                Text("Select words of similar length")
             })
-            Text(current_language == "en" ? "The password generator will try to select two words with the same length." : "Der Passwortgenerator versucht, zwei Wörter mit der gleichen Länge auszuwählen.")
+            Text("The password generator will try to select two words with the same length.")
                 .font(.footnote)
                 .opacity(0.7)
                 .fixedSize(horizontal: false, vertical: true)
@@ -70,7 +72,7 @@ struct SettingsView: View {
             }) {
                 Text(current_language == "en" ? "Limit maximal password length" : "Maximale Passwortlänge begrenzen")
             }
-            Text(current_language == "en" ? "Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option." : "Begrenzt die maximale Wortlänge auf einen Standardwert von 31 Zeichen. Wenn Sie längere Passwörter generieren möchten, deaktivieren Sie diese Option.")
+            Text("Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option.")
                 .font(.footnote)
                 .opacity(0.7)
                 .fixedSize(horizontal: false, vertical: true)

@@ -1,0 +1,22 @@
+/* 
+  Localizable.strings
+  PassWord
+
+  Created by Carl Raabe on 19.01.22.
+  
+*/
+
+// Main View
+"Generate new" = "Neu generieren";
+"Generated password" = "Generiertes Passwort";
+
+// Settings View
+"Password settings" = "Passworteinstellungen";
+"Choose a language for the words that make up the password." = "Wähle eine Sprache für die Wörter aus denen das Passwort besteht.";
+"Select words of similar length" = "Select words of similar length";
+"The password generator will try to select two words with the same length." = "Der Passwortgenerator versucht, zwei Wörter mit der gleichen Länge auszuwählen.";
+"Limit maximal password length" = "Maximale Passwortlänge begrenzen";
+"Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option." = "Begrenzt die maximale Wortlänge auf einen Standardwert von 31 Zeichen. Wenn Sie längere Passwörter generieren möchten, deaktivieren Sie diese Option.";
+
+// About View
+"Developer" = "Entwickler";

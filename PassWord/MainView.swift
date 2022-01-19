@@ -32,7 +32,7 @@ struct MainView: View {
 
     func initView() {
         var index: [Int: String] = word_index_english
-        
+        print("Langcode \(Locale.current.languageCode!)")
         if let current_lang_code = Locale.current.languageCode, UserDefaults.standard.value(forKey: "firstLaunch") == nil {
             print("Code \(current_lang_code)")
             switch current_lang_code {
@@ -108,7 +108,7 @@ struct MainView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 20)
                         .foregroundColor(Color("default_fg_important"))
-                    TextField(lang_model.current_lang == "de" ? "Generiertes Passwort" : "Generated password", text: $current_password)
+                    TextField("Generated password", text: $current_password)
                         .textFieldStyle(PlainTextFieldStyle())
                         .font(.system(size: 15, weight: .semibold, design: .monospaced))
                         .truncationMode(.tail)
@@ -159,7 +159,7 @@ struct MainView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 20)
-                    Text(lang_model.current_lang == "de" ? "Neu generieren" : "Generate new")
+                    Text("Generate new")
                         .font(.system(size: 15, weight: .semibold, design: .monospaced))
                         .truncationMode(.tail)
                     Spacer()
