@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutView: View {
-    @State var current_lang: String = "eng"
+    @State var current_lang: String = "en"
     @State var current_version: String = "1.0"
     private func initView() {
         if let current_language = UserDefaults.standard.value(forKey: "lang") as? String {

@@ -9,19 +9,19 @@ import SwiftUI
 
 struct MainView: View {
     // Current password
-    @State var current_password: String = ""
-    @State var handler: word_handler = .init(index: word_index_english)
+    @State private var current_password: String = ""
+    @State private var handler: word_handler = .init(index: word_index_english)
 
     // Increase or decrease word length
-    @ObservedObject var stepper_model: StepperViewModel = .init(start_val: 15, min_value: 6, max_value: 31)
+    @ObservedObject private var stepper_model: StepperViewModel = .init(start_val: 15, min_value: 6, max_value: 31)
 
     // Language selection
     @ObservedObject var lang_model = LanguageViewModel()
 
     // Base settings
-    @State var show_settings: Bool = false
-    @State var equal_words: Bool = true
-    @State var limit_chars: Bool = true
+    @State private var show_settings: Bool = false
+    @State private var equal_words: Bool = true
+    @State private var limit_chars: Bool = true
 
     // Scalings
     @State private var scale_copy: CGFloat = 1
@@ -32,6 +32,18 @@ struct MainView: View {
 
     func initView() {
         var index: [Int: String] = word_index_english
+        
+        if let current_lang_code = Locale.current.languageCode, UserDefaults.standard.value(forKey: "firstLaunch") == nil {
+            print("Code \(current_lang_code)")
+            switch current_lang_code {
+            case "de":
+                UserDefaults.standard.set("de", forKey: "lang")
+            default:
+                break
+            }
+            UserDefaults.standard.set(false, forKey: "firstLaunch")
+        }
+        
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
             print(lang)
             lang_model.lang_set = true
@@ -39,8 +51,8 @@ struct MainView: View {
             switch lang {
             case "de":
                 index = word_index_german
-            case "eng":
-                print("eng")
+            case "en":
+                print("en")
                 index = word_index_english
             default:
                 lang_model.lang_set = false

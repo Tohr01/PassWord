@@ -15,7 +15,7 @@ struct language: Hashable {
 struct SettingsView: View {
     @State var languages: [language] = [
         .init(language_display_name: "Deutsch", language_identifier: "de"),
-        .init(language_display_name: "English", language_identifier: "eng"),
+        .init(language_display_name: "English", language_identifier: "en"),
     ]
 
     @State private var selected_language_index: Int = 1
@@ -29,7 +29,7 @@ struct SettingsView: View {
         VStack(alignment: .leading) {
             // MARK: Language selection
 
-            Text(current_language == "eng" ? "Language selection:" : "Sprachauswahl:")
+            Text(current_language == "en" ? "Language selection:" : "Sprachauswahl:")
                 .font(.headline)
             Picker(selection: $selected_language_index.onChange { _ in
                 let new_lang = languages[selected_language_index].language_identifier
@@ -44,7 +44,7 @@ struct SettingsView: View {
 
             Divider()
 
-            Text(current_language == "eng" ? "Password settings:" : "Passworteinstellungen")
+            Text(current_language == "en" ? "Password settings:" : "Passworteinstellungen")
                 .font(.headline)
 
             // MARK: Equal word length selection
@@ -54,7 +54,7 @@ struct SettingsView: View {
             }, label: {
                 Text("Equal word selection")
             })
-            Text(current_language == "eng" ? "The password generator will try to select two words with the same length." : "Der Passwortgenerator versucht, zwei Wörter mit der gleichen Länge auszuwählen.")
+            Text(current_language == "en" ? "The password generator will try to select two words with the same length." : "Der Passwortgenerator versucht, zwei Wörter mit der gleichen Länge auszuwählen.")
                 .font(.footnote)
                 .opacity(0.7)
                 .fixedSize(horizontal: false, vertical: true)
@@ -68,9 +68,9 @@ struct SettingsView: View {
                 UserDefaults.standard.set(limit_chars_wrapper, forKey: "limit_chars")
                 limit_chars = limit_chars
             }) {
-                Text(current_language == "eng" ? "Limit maximal password length" : "Maximale Passwortlänge begrenzen")
+                Text(current_language == "en" ? "Limit maximal password length" : "Maximale Passwortlänge begrenzen")
             }
-            Text(current_language == "eng" ? "Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option." : "Begrenzt die maximale Wortlänge auf einen Standardwert von 31 Zeichen. Wenn Sie längere Passwörter generieren möchten, deaktivieren Sie diese Option.")
+            Text(current_language == "en" ? "Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option." : "Begrenzt die maximale Wortlänge auf einen Standardwert von 31 Zeichen. Wenn Sie längere Passwörter generieren möchten, deaktivieren Sie diese Option.")
                 .font(.footnote)
                 .opacity(0.7)
                 .fixedSize(horizontal: false, vertical: true)

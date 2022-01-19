@@ -17,7 +17,7 @@ class LanguageViewModel: ObservableObject {
 
     @Published var old_lang: String
 
-    init(lang_set: Bool = false, current_lang: String = "eng", old_lang: String = "") {
+    init(lang_set: Bool = false, current_lang: String = "en", old_lang: String = "") {
         self.lang_set = lang_set
         self.current_lang = current_lang
         self.old_lang = old_lang
