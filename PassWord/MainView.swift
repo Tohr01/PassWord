@@ -182,6 +182,8 @@ struct MainView: View {
                         scale_generate_new = 1
                     })
 
+                Spacer()
+                
                 // MARK: Custom stepper
 
                 // Increase word length button
