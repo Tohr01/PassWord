@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
     </dependencies>
     <objects>
@@ -11,11 +10,11 @@
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
-                <menuItem title="PassWord" id="1Xt-HY-uBw">
+                <menuItem title="PassWord-Creator" id="1Xt-HY-uBw">
                     <modifierMask key="keyEquivalentModifierMask"/>
-                    <menu key="submenu" title="PassWord" systemMenu="apple" id="uQy-DD-JDr">
+                    <menu key="submenu" title="PassWord-Creator" systemMenu="apple" id="uQy-DD-JDr">
                         <items>
-                            <menuItem title="About PassWord" id="5kV-Vb-QxS">
+                            <menuItem title="About PassWord-Creator" id="5kV-Vb-QxS">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="about:" target="-1" id="Mcg-pf-Nns"/>
