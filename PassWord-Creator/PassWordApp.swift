@@ -64,7 +64,7 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
         if about_window == nil || !about_window.isVisible {
             about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
 
-            about_window.title = "PassWord - About"
+            about_window.title = "PassWord Creator - About"
             about_window.isReleasedWhenClosed = false
             about_window.center()
             about_window.contentView = NSHostingView(rootView: AboutView())
@@ -97,7 +97,7 @@ class OldAppDelegate: NSObject, NSApplicationDelegate {
         if about_window == nil || !about_window.isVisible {
             about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
 
-            about_window.title = "PassWord - About"
+            about_window.title = "PassWord Creator - About"
             about_window.isReleasedWhenClosed = false
             about_window.center()
             about_window.contentView = NSHostingView(rootView: AboutView())
