@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -94,6 +94,10 @@
 		C3C5AF9B27602A3C00178E4E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C5AF9A27602A3C00178E4E /* Assets.xcassets */; };
 		C3C5AF9E27602A3C00178E4E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3C5AF9D27602A3C00178E4E /* Preview Assets.xcassets */; };
 		C3D1B4C8277B66260032F705 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3D1B4C7277B66260032F705 /* Extentions.swift */; };
+		C3FD43412C35CB700045F82B /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3FD433D2C35CB6F0045F82B /* Rubik-Medium.ttf */; };
+		C3FD43422C35CB700045F82B /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3FD433E2C35CB700045F82B /* Rubik-Regular.ttf */; };
+		C3FD43432C35CB700045F82B /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3FD433F2C35CB700045F82B /* Rubik-Bold.ttf */; };
+		C3FD43442C35CB700045F82B /* Rubik-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C3FD43402C35CB700045F82B /* Rubik-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +191,11 @@
 		C3C5AF9D27602A3C00178E4E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C3C5AF9F27602A3C00178E4E /* PassWord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PassWord.entitlements; sourceTree = "<group>"; };
 		C3D1B4C7277B66260032F705 /* Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		C3FD433D2C35CB6F0045F82B /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		C3FD433E2C35CB700045F82B /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		C3FD433F2C35CB700045F82B /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		C3FD43402C35CB700045F82B /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
+		C3FD43452C35CC900045F82B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = "PassWord-Creator/Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +212,7 @@
 		C3C5AF8A27602A3A00178E4E = {
 			isa = PBXGroup;
 			children = (
+				C3FD43452C35CC900045F82B /* Info.plist */,
 				C3C5AF9527602A3B00178E4E /* PassWord */,
 				C3C5AF9427602A3B00178E4E /* Products */,
 			);
@@ -219,6 +229,7 @@
 		C3C5AF9527602A3B00178E4E /* PassWord */ = {
 			isa = PBXGroup;
 			children = (
+				C3FD433C2C35CAEA0045F82B /* fonts */,
 				C32A5A402798A31300263E97 /* Localizable.strings */,
 				C3C5AF9627602A3B00178E4E /* PassWordApp.swift */,
 				C3C5AF9827602A3B00178E4E /* MainView.swift */,
@@ -376,6 +387,17 @@
 			path = eng;
 			sourceTree = "<group>";
 		};
+		C3FD433C2C35CAEA0045F82B /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C3FD433F2C35CB700045F82B /* Rubik-Bold.ttf */,
+				C3FD433D2C35CB6F0045F82B /* Rubik-Medium.ttf */,
+				C3FD433E2C35CB700045F82B /* Rubik-Regular.ttf */,
+				C3FD43402C35CB700045F82B /* Rubik-SemiBold.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -442,6 +464,7 @@
 				C3BB2BF9277142CA002802B7 /* 24-de.wordpass in Resources */,
 				C3BB2BFB277142CA002802B7 /* 6-de.wordpass in Resources */,
 				C3C5AF9E27602A3C00178E4E /* Preview Assets.xcassets in Resources */,
+				C3FD43442C35CB700045F82B /* Rubik-SemiBold.ttf in Resources */,
 				C3BB2BE7277142CA002802B7 /* 44-de.wordpass in Resources */,
 				C3BB2BDA277142CA002802B7 /* 42-de.wordpass in Resources */,
 				C3A7640A2771FFB200103870 /* 2-eng.wordpass in Resources */,
@@ -455,6 +478,7 @@
 				C3A764002771FFB200103870 /* 19-eng.wordpass in Resources */,
 				C3BB2BD6277142CA002802B7 /* 13-de.wordpass in Resources */,
 				C3BB2BF6277142CA002802B7 /* 25-de.wordpass in Resources */,
+				C3FD43412C35CB700045F82B /* Rubik-Medium.ttf in Resources */,
 				C3A7640E2771FFB200103870 /* 3-eng.wordpass in Resources */,
 				C3BB2BED277142CA002802B7 /* 23-de.wordpass in Resources */,
 				C3A764062771FFB200103870 /* 11-eng.wordpass in Resources */,
@@ -475,6 +499,7 @@
 				C3BB2BF5277142CA002802B7 /* 7-de.wordpass in Resources */,
 				C3BB2BE0277142CA002802B7 /* 27-de.wordpass in Resources */,
 				C3A763FE2771FFB200103870 /* 14-eng.wordpass in Resources */,
+				C3FD43432C35CB700045F82B /* Rubik-Bold.ttf in Resources */,
 				C3BB2BD4277142CA002802B7 /* 32-de.wordpass in Resources */,
 				C3BB2BDB277142CA002802B7 /* 30-de.wordpass in Resources */,
 				C3A764112771FFB200103870 /* 17-eng.wordpass in Resources */,
@@ -483,6 +508,7 @@
 				C3BB2BEA277142CA002802B7 /* 36-de.wordpass in Resources */,
 				C3BB2BDE277142CA002802B7 /* 20-de.wordpass in Resources */,
 				C3BB2BD8277142CA002802B7 /* 33-de.wordpass in Resources */,
+				C3FD43422C35CB700045F82B /* Rubik-Regular.ttf in Resources */,
 				C3BB2BD1277142CA002802B7 /* 5-de.wordpass in Resources */,
 				C3BB2BE4277142CA002802B7 /* 3-de.wordpass in Resources */,
 				C3A764022771FFB200103870 /* 23-eng.wordpass in Resources */,
@@ -674,14 +700,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PassWord-Creator/PassWord.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PassWord-Creator/Preview Content\"";
-				DEVELOPMENT_TEAM = 2UGDUMT6N4;
+				DEVELOPMENT_TEAM = 6QP6B7Z4NQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PassWord-Creator/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -704,14 +732,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "PassWord-Creator/PassWord.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PassWord-Creator/Preview Content\"";
-				DEVELOPMENT_TEAM = 2UGDUMT6N4;
+				DEVELOPMENT_TEAM = 6QP6B7Z4NQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "PassWord-Creator/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

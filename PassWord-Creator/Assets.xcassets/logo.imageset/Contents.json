@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "password-logo-light.png",
+      "filename" : "text_dark.png",
       "idiom" : "universal"
     },
     {
@@ -11,12 +11,16 @@
           "value" : "dark"
         }
       ],
-      "filename" : "password-logo-dark.png",
+      "filename" : "text_light.png",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
+  },
+  "properties" : {
+    "compression-type" : "lossless",
+    "template-rendering-intent" : "original"
   }
 }

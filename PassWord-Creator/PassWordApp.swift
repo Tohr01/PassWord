@@ -27,7 +27,9 @@ struct NewUIApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .frame(width: 500, height: 170)
         }
+        .windowFitToContentSize()
     }
 }
 

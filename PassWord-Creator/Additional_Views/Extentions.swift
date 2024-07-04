@@ -18,3 +18,14 @@ extension Binding {
         )
     }
 }
+
+@available(macOS 11.0, *)
+extension Scene {
+    func windowFitToContentSize() -> some Scene {
+            if #available(macOS 13.0, *) {
+                return windowResizability(.contentSize)
+            } else {
+                return self
+            }
+        }
+}

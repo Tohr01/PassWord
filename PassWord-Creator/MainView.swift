@@ -160,7 +160,7 @@ struct MainView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(height: 20)
                     Text("Generate new")
-                        .font(.system(size: 15, weight: .semibold, design: .monospaced))
+                        .font(Font.custom("Rubik-SemiBold", size: 15))
                         .truncationMode(.tail)
                     Spacer()
                 }
@@ -223,7 +223,7 @@ struct MainView: View {
                         )
 
                     Text(String(stepper_model.value))
-                        .font(.system(size: 15, weight: .medium, design: .monospaced))
+                        .font(Font.custom("Rubik-SemiBold", size: 15))
                         .padding()
 
                     Image("plus")
@@ -304,7 +304,6 @@ struct MainView: View {
         }
         .padding()
         .zIndex(1)
-        .frame(minWidth: 470, idealWidth: 470, maxWidth: 750, minHeight: 170, maxHeight: 170)
         .onAppear {
             initView()
         }
