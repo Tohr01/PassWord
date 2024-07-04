@@ -13,7 +13,7 @@
 // Settings View
 "Password settings" = "Password settings";
 "Choose a language for the words that make up the password." = "Choose a language for the words that make up the password.";
-"Select words of similar length" = "Equal word selection";
+"Select words of similar length" = "Select words of similar length";
 "The password generator will try to select two words with the same length." = "The password generator will try to select two words with the same length.";
 "Limit maximal password length" = "Limit maximal password length";
 "Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option." = "Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option.";

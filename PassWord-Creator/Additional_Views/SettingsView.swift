@@ -70,7 +70,7 @@ struct SettingsView: View {
                 UserDefaults.standard.set(limit_chars_wrapper, forKey: "limit_chars")
                 limit_chars = limit_chars
             }) {
-                Text(current_language == "en" ? "Limit maximal password length" : "Maximale Passwortlänge begrenzen")
+                Text("Limit maximal password length")
             }
             Text("Limits the maximal word length to a default of 31 characters. If you want to generate longer passwords uncheck this option.")
                 .font(.footnote)
