@@ -9,6 +9,7 @@ import SwiftUI
 
 var appDelegate = OldAppDelegate()
 
+/// Entry point
 @main
 enum AppUISelector {
     static func main() {
@@ -20,6 +21,7 @@ enum AppUISelector {
     }
 }
 
+/// Handler for macOS Big Sur and up
 @available(macOS 11.0, *)
 struct NewUIApp: App {
     @NSApplicationDelegateAdaptor(NewAppDelegate.self) var app_delegate
@@ -27,12 +29,13 @@ struct NewUIApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
-                .frame(width: 500, height: 170)
+                .frame(width: 550, height: 170)
         }
         .windowFitToContentSize()
     }
 }
 
+/// Handler for macOS Catalina
 enum OldUIApp {
     static func main() {
         NSApplication.shared.setActivationPolicy(.regular)
@@ -46,10 +49,12 @@ enum OldUIApp {
     }
 }
 
+/// App Delegate use by NewUIApp
 class NewAppDelegate: NSObject, NSApplicationDelegate {
     var about_window: NSWindow!
 
     func applicationWillBecomeActive(_: Notification) {
+        // Load menu
         let nib = NSNib(nibNamed: NSNib.Name("MainMenu"), bundle: Bundle.main)
         nib?.instantiate(withOwner: NSApplication.shared, topLevelObjects: nil)
     }
@@ -63,20 +68,12 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func about(_ sender: Any) {
-        if about_window == nil || !about_window.isVisible {
-            about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
-
-            about_window.title = "PassWord Creator - About"
-            about_window.isReleasedWhenClosed = false
-            about_window.center()
-            about_window.contentView = NSHostingView(rootView: AboutView())
-            about_window.makeKeyAndOrderFront(nil)
-        } else {
-            about_window.makeKeyAndOrderFront(nil)
-        }
+        // Open about window (or bring to front if already open)
+        openAboutWin(window: &about_window)
     }
 }
 
+/// App Delegate use by OldUIApp
 class OldAppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow!
     var about_window: NSWindow!
@@ -93,19 +90,24 @@ class OldAppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(nil)
     }
 
-    func applicationWillTerminate(_: Notification) {}
-
     @IBAction func about(_ sender: Any) {
-        if about_window == nil || !about_window.isVisible {
-            about_window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+        openAboutWin(window: &about_window)
+    }
+}
 
-            about_window.title = "PassWord Creator - About"
-            about_window.isReleasedWhenClosed = false
-            about_window.center()
-            about_window.contentView = NSHostingView(rootView: AboutView())
-            about_window.makeKeyAndOrderFront(nil)
-        } else {
-            about_window.makeKeyAndOrderFront(nil)
-        }
+/**
+ Opens the About View in a NSWindow reference
+ */
+func openAboutWin(window: inout NSWindow!) {
+    if window == nil || !window.isVisible {
+        window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 500, height: 500), styleMask: [.titled, .closable], backing: .buffered, defer: false)
+
+        window.title = "PassWord Creator - About"
+        window.isReleasedWhenClosed = false
+        window.center()
+        window.contentView = NSHostingView(rootView: AboutView())
+        window.makeKeyAndOrderFront(nil)
+    } else {
+        window.makeKeyAndOrderFront(nil)
     }
 }

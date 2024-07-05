@@ -225,6 +225,7 @@ struct MainView: View {
                     Text(String(stepper_model.value))
                         .font(Font.custom("Rubik-SemiBold", size: 15))
                         .padding()
+                        .frame(width: 60)
 
                     Image("plus")
                         .resizable()
