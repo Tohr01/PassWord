@@ -24,7 +24,7 @@ struct SettingsView: View {
     @Binding var equal_words: Bool
     @Binding var limit_chars: Bool
     @State private var limit_chars_wrapper: Bool = true
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             // MARK: Language selection
@@ -38,10 +38,12 @@ struct SettingsView: View {
                 UserDefaults.standard.set(new_lang, forKey: "lang")
                 current_language = new_lang
             }, content: {
-                ForEach(0 ..< self.languages.count) { index in
+                ForEach(0..<self.languages.count, id: \.self) { index in
                     Text(self.languages[index].language_display_name)
                 }
             }, label: {})
+            .pickerStyle(SegmentedPickerStyle())
+            
             Text("Choose a language for the words that make up the password.")
                 .font(.footnote)
                 .opacity(0.7)
