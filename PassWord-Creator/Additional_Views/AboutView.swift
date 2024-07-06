@@ -60,7 +60,7 @@ struct AboutView: View {
             .frame(height: 35)
             .padding(10)
             .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(Color("default_fg")).opacity(0.1))
-            Text("Copyright © 2021 - 2022 Carl Raabe")
+            Text("Copyright © 2021 - 2024 Carl Raabe")
                 .font(.footnote)
                 .opacity(0.7)
         }
