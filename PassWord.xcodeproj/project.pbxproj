@@ -101,7 +101,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C30129AC27973DA2001722CB /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = "PassWord-Creator/MainMenu.xib"; sourceTree = SOURCE_ROOT; };
+		C30129AC27973DA2001722CB /* MainMenu.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenu.xib; path = PassWord/MainMenu.xib; sourceTree = SOURCE_ROOT; };
 		C306CE6C2770F26C00102885 /* StepperViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperViewModel.swift; sourceTree = "<group>"; };
 		C32A5A3F2798A31300263E97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C32A5A422798A58600263E97 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		C3FD433E2C35CB700045F82B /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		C3FD433F2C35CB700045F82B /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		C3FD43402C35CB700045F82B /* Rubik-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-SemiBold.ttf"; sourceTree = "<group>"; };
-		C3FD43452C35CC900045F82B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = "PassWord-Creator/Info.plist"; sourceTree = "<group>"; };
+		C3FD43452C35CC900045F82B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = PassWord/Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,8 +241,7 @@
 				C3C5AF9F27602A3C00178E4E /* PassWord.entitlements */,
 				C3C5AF9C27602A3C00178E4E /* Preview Content */,
 			);
-			name = PassWord;
-			path = "PassWord-Creator";
+			path = PassWord;
 			sourceTree = "<group>";
 		};
 		C3C5AF9C27602A3C00178E4E /* Preview Content */ = {
@@ -698,18 +697,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "PassWord-Creator/PassWord.entitlements";
+				CODE_SIGN_ENTITLEMENTS = PassWord/PassWord.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PassWord-Creator/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PassWord/Preview Content\"";
 				DEVELOPMENT_TEAM = 6QP6B7Z4NQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PassWord-Creator/Info.plist";
+				INFOPLIST_FILE = PassWord/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -730,18 +729,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "PassWord-Creator/PassWord.entitlements";
+				CODE_SIGN_ENTITLEMENTS = PassWord/PassWord.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PassWord-Creator/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PassWord/Preview Content\"";
 				DEVELOPMENT_TEAM = 6QP6B7Z4NQ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PassWord-Creator/Info.plist";
+				INFOPLIST_FILE = PassWord/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
