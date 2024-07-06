@@ -32,9 +32,7 @@ struct MainView: View {
 
     func initView() {
         var index: [Int: String] = word_index_english
-        print("Langcode \(Locale.current.languageCode!)")
         if let current_lang_code = Locale.current.languageCode, UserDefaults.standard.value(forKey: "firstLaunch") == nil {
-            print("Code \(current_lang_code)")
             switch current_lang_code {
             case "de":
                 UserDefaults.standard.set("de", forKey: "lang")
@@ -45,14 +43,12 @@ struct MainView: View {
         }
         
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
-            print(lang)
             lang_model.lang_set = true
             lang_model.current_lang = lang
             switch lang {
             case "de":
                 index = word_index_german
             case "en":
-                print("en")
                 index = word_index_english
             default:
                 lang_model.lang_set = false
@@ -68,9 +64,7 @@ struct MainView: View {
         handler = word_handler(index: index)
 
         if let generated_password = genPass(targetLength: stepper_model.value, handler: handler), let maxLength = handler.getMaximumDefaultLength(), let minLength = handler.getMinimumDefaultLength() {
-            print("reached")
             current_password = generated_password
-            print(minLength, maxLength)
             stepper_model.value = 15
             stepper_model.min_value = minLength - 1
             stepper_model.max_value = limit_chars ? 31 : maxLength
