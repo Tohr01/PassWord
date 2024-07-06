@@ -24,4 +24,4 @@ PassWord has been localized into the following languages and can generate passwo
 - [English wordlist](https://github.com/dwyl/english-words/blob/master/words.txt) by dwyl
 
 ## 📑 License
-This project is licensed under the MIT License. See [License](License.md) for more information.
+This project is licensed under the MIT License. See [License](LICENSE.md) for more information.
