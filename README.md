@@ -1,8 +1,9 @@
 <img src="imgs/text_dark_banner.jpg"/>
 In macOS 10.15 Apple removed the abilty to generate memorable passwords in the Keychain Access application. This little project aims to bringing the functionality back.
 
+<p align="center">
 <img src="imgs/screenshot_darkmode.png">
-
+</p>
 ## 📙 Supported languages 
 PassWord has been localized into the following languages and can generate passwords using each of them.
 - **English**: ```Louses59(Voting``` 
