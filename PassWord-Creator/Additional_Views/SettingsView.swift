@@ -14,7 +14,7 @@ struct language: Hashable {
 
 struct SettingsView: View {
     @State var languages: [language] = [
-        .init(language_display_name: "Deutsch", language_identifier: "de"),
+        .init(language_display_name: "German", language_identifier: "de"),
         .init(language_display_name: "English", language_identifier: "en"),
     ]
 

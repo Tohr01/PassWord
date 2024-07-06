@@ -12,6 +12,8 @@
 
 // Settings View
 "Password settings" = "Passworteinstellungen";
+"German" = "Deutsch";
+"English" = "Englisch";
 "Choose a language for the words that make up the password." = "Wähle eine Sprache für die Wörter aus denen das Passwort besteht.";
 "Select words of similar length" = "Select words of similar length";
 "The password generator will try to select two words with the same length." = "Der Passwortgenerator versucht, zwei Wörter mit der gleichen Länge auszuwählen.";
