@@ -51,12 +51,12 @@ func genPass(targetLength: Int, handler: word_handler, evenWords: Bool = true) -
             // Word1
             var word1 = wordlist1[Int(wordIndex1)]
             // Capitalizes first letter with a chance of 50%
-            word1 = trueOrFalse() ? uppercaseFirstLetter(str: word1) : lowercaseFirstLetter(str: word1)
+            word1 = trueOrFalse() ? word1.uppercaseFirstLetter : word1.lowercaseFirstLetter
 
             // Word2
             var word2 = wordlist2[Int(wordIndex2)]
             // Capitalizes first letter with a chance of 50%
-            word2 = trueOrFalse() ? uppercaseFirstLetter(str: word2) : lowercaseFirstLetter(str: word2)
+            word2 = trueOrFalse() ? word2.uppercaseFirstLetter : word2.lowercaseFirstLetter
 
             return word1 + String(number) + special_char + word2
         }

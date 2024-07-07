@@ -29,3 +29,8 @@ extension Scene {
             }
         }
 }
+
+extension StringProtocol {
+    var uppercaseFirstLetter: String { prefix(1).uppercased() + dropFirst()}
+    var lowercaseFirstLetter: String { prefix(1).lowercased() + dropFirst()}
+}

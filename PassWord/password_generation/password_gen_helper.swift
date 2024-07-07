@@ -9,9 +9,8 @@ import Foundation
 
 func genRandomSpecialChar() -> String {
     let special_chars = ["+", "-", "&", "!", "(", ")", "{", "}", "[", "]", "~", "*", "?", ":", ";"]
-    let randomNum = arc4random_uniform(UInt32(special_chars.count))
 
-    return special_chars[Int(randomNum)]
+    return special_chars.randomElement()!
 }
 
 func getWordComposition(in letter_count_list: [Int], targetLength: Int, evenWords: Bool) -> (Int, Int)? {
@@ -39,20 +38,6 @@ func trueOrFalse() -> Bool {
     let random = arc4random_uniform(2)
 
     return random == 1 ? true : false
-}
-
-func uppercaseFirstLetter(str: String) -> String {
-    if let first_letter = str.first {
-        return first_letter.uppercased() + str.dropFirst()
-    }
-    return str
-}
-
-func lowercaseFirstLetter(str: String) -> String {
-    if let first_letter = str.first {
-        return first_letter.lowercased() + str.dropFirst()
-    }
-    return str
 }
 
 func sort(arr: [Int], smallest_value: Int) -> [Int] {
