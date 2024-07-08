@@ -77,7 +77,6 @@ struct MainView: View {
     func easy_gen_pass() {
         // Get current length
         let length = stepper_model.value
-        let minLength = handler.getMinimumDefaultLength()
         let maxLength = handler.getMaximumDefaultLength()
         if let new_pw = genPass(targetLength: length <= maxLength ? length : maxLength, word_handler: handler, evenWords: equal_words) {
             current_password = new_pw

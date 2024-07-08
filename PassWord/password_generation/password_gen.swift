@@ -41,8 +41,7 @@ func genPass(targetLength: Int, word_handler: WordHandler, evenWords: Bool = tru
     // Total word length of the two words without the number or the special character
     let totalWordLength = targetLength - passNumber.count - 1
 
-    // Shuffle array of avaiable word lengths and filter out every value that is higher than the total word length
-    let formatted_word_length_arr = sort(arr: word_handler.getAvaiableWordLengths().filter { $0 < totalWordLength }.shuffled(), smallest_value: 3)
+    // Get word composition
     if let wordLengths = getWordComposition(word_handler: word_handler, targetLength: totalWordLength, evenWords: evenWords) {
         if let wordlist1 = word_handler.getWords(for: wordLengths.0), let wordlist2 = word_handler.getWords(for: wordLengths.1) {
             let wordIndex1 = arc4random_uniform(UInt32(wordlist1.count))

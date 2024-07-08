@@ -7,12 +7,22 @@
 
 import Foundation
 
+/**
+ - Returns random special char from constant array
+ */
 func genRandomSpecialChar() -> String {
     let special_chars = ["+", "-", "&", "!", "(", ")", "{", "}", "[", "]", "~", "*", "?", ":", ";"]
 
     return special_chars.randomElement()!
 }
 
+/**
+ Returns random string of given length consisting of numbers from 0-9
+
+ - Parameter length: Target length of string
+
+ - Returns: Resulting string
+ */
 func genRandomNumberStr(length: Int) -> String {
     var res = String()
     for _ in 0 ..< length {
@@ -21,6 +31,15 @@ func genRandomNumberStr(length: Int) -> String {
     return res
 }
 
+/**
+ Returns nil or a tuple of two word length adding up to targetLength
+
+ - Parameter word_handler: Reference to WordHandler Object
+ - Parameter targetLength: Target length (result tuple adds up to target length)
+ - Parameter evenWords: If set to true will try to find equal length words first
+
+ - Returns: Nil or tuple
+ */
 func getWordComposition(word_handler: WordHandler, targetLength: Int, evenWords: Bool) -> (Int, Int)? {
     let word_lengths_set = word_handler.getAvaiableWordLengths()
     if evenWords {
@@ -43,12 +62,4 @@ func getWordComposition(word_handler: WordHandler, targetLength: Int, evenWords:
         }
     }
     return nil
-}
-
-func sort(arr: [Int], smallest_value: Int) -> [Int] {
-    // [2,3,5,4,6,7,8] 3
-    // [4,5,6,7,8,2,3]
-    let high_val_arr = arr.filter { $0 > smallest_value }
-    let small_val_arr = arr.filter { $0 <= smallest_value }
-    return high_val_arr + small_val_arr
 }
