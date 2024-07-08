@@ -17,48 +17,48 @@ import Foundation
 
  - Returns: The password or nil if targetLength is too short or a if an error occurred
  */
-func genPass(targetLength: Int, handler: word_handler, evenWords: Bool = true) -> String? {
-    let words = handler
-
+func genPass(targetLength: Int, word_handler: WordHandler, evenWords: Bool = true) -> String? {
     // The number included in the password (X)
-    var number = Int()
+    var passNumber = String()
 
-    if let minimum_password_length = words.getMinimumDefaultLength(), let maximum_password_length = words.getMaximumDefaultLength() {
-        if minimum_password_length > targetLength {
-            // The number ranging from 0 - 10 if targetLength is lower than minimum_password_length
-            number = Int.random(in: 0 ..< 10)
-        } else if maximum_password_length == targetLength {
-            number = Int.random(in: 10 ..< 100)
-        } else {
-            // The number ranging from 0 - 99 if targetLength is higher than minimum_password_length
-            number = Int.random(in: 0 ..< 100)
-        }
+    let minimum_password_length = word_handler.getMinimumDefaultLength()
+    let maximum_password_length = word_handler.getMaximumDefaultLength()
+    assert(targetLength >= minimum_password_length, "Target length cannot be smaller than min. password length")
+    assert(targetLength <= maximum_password_length, "Target length cannot be bigger than max. password length")
+    if minimum_password_length == targetLength {
+        // The number str should be of length 1 because user selected minimum available pw length
+        passNumber = genRandomNumberStr(length: 1)
+    } else if maximum_password_length == targetLength {
+        // The number str should be of length 3 because user selected maximum available pw length
+        passNumber = genRandomNumberStr(length: 3)
     } else {
-        return nil
+        // Target lenth is in interval (min_size; max_size)
+        passNumber = genRandomNumberStr(length: Int.random(in: 2 ... 3))
     }
-
+    
+    
     // The special character
     let special_char = genRandomSpecialChar()
     // Total word length of the two words without the number or the special character
-    let totalWordLength = targetLength - String(number).count - 1
+    let totalWordLength = targetLength - passNumber.count - 1
 
     // Shuffle array of avaiable word lengths and filter out every value that is higher than the total word length
-    let formatted_word_length_arr = sort(arr: words.getAvaiableWordLengths().filter { $0 < totalWordLength }.shuffled(), smallest_value: 3)
-    if let wordLengths = getWordComposition(in: formatted_word_length_arr, targetLength: totalWordLength, evenWords: evenWords) {
-        if let wordlist1 = words.getWords(for: wordLengths.0), let wordlist2 = words.getWords(for: wordLengths.1) {
+    let formatted_word_length_arr = sort(arr: word_handler.getAvaiableWordLengths().filter { $0 < totalWordLength }.shuffled(), smallest_value: 3)
+    if let wordLengths = getWordComposition(word_handler: word_handler, targetLength: totalWordLength, evenWords: evenWords) {
+        if let wordlist1 = word_handler.getWords(for: wordLengths.0), let wordlist2 = word_handler.getWords(for: wordLengths.1) {
             let wordIndex1 = arc4random_uniform(UInt32(wordlist1.count))
             let wordIndex2 = arc4random_uniform(UInt32(wordlist2.count))
             // Word1
             var word1 = wordlist1[Int(wordIndex1)]
             // Capitalizes first letter with a chance of 50%
-            word1 = trueOrFalse() ? word1.uppercaseFirstLetter : word1.lowercaseFirstLetter
+            word1 = Bool.random() ? word1.uppercaseFirstLetter : word1.lowercaseFirstLetter
 
             // Word2
             var word2 = wordlist2[Int(wordIndex2)]
             // Capitalizes first letter with a chance of 50%
-            word2 = trueOrFalse() ? word2.uppercaseFirstLetter : word2.lowercaseFirstLetter
+            word2 = Bool.random() ? word2.uppercaseFirstLetter : word2.lowercaseFirstLetter
 
-            return word1 + String(number) + special_char + word2
+            return word1 + passNumber + special_char + word2
         }
     }
     return nil

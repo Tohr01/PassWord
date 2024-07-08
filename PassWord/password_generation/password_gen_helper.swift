@@ -13,31 +13,36 @@ func genRandomSpecialChar() -> String {
     return special_chars.randomElement()!
 }
 
-func getWordComposition(in letter_count_list: [Int], targetLength: Int, evenWords: Bool) -> (Int, Int)? {
+func genRandomNumberStr(length: Int) -> String {
+    var res = String()
+    for _ in 0..<length {
+        res += "\(Int.random(in: 0 ..< 10))"
+    }
+    return res
+}
+
+func getWordComposition(word_handler: WordHandler, targetLength: Int, evenWords: Bool) -> (Int, Int)? {
+    let word_lengths_set = word_handler.getAvaiableWordLengths()
     if evenWords {
         // Returns a tuple of two preferrably even numbers if possible
-        let preffered_length_word_1 = targetLength / 2
-        for i in letter_count_list {
-            if i + preffered_length_word_1 == targetLength {
-                return (preffered_length_word_1, i)
-            }
+        let length_w_1 = Int(targetLength / 2)
+        let length_w_2 = targetLength - length_w_1
+        if word_lengths_set.contains(length_w_1) && word_lengths_set.contains(length_w_2) {
+            return (length_w_1, length_w_2)
         }
     }
-    // Fallback if first test doesn't return a result
-    for i in letter_count_list {
-        for j in letter_count_list {
-            if i + j == targetLength {
-                return (i, j)
-            }
+    
+    // Fallback or if evenWords = false
+    // Shuffle set
+    let word_lengths_shuffled = word_lengths_set.shuffled()
+    for idx in 0 ..< word_lengths_set.count {
+        let l1 = word_lengths_shuffled[idx]
+        let complement = targetLength - l1
+        if word_lengths_set.contains(complement) {
+            return (l1, complement)
         }
     }
     return nil
-}
-
-func trueOrFalse() -> Bool {
-    let random = arc4random_uniform(2)
-
-    return random == 1 ? true : false
 }
 
 func sort(arr: [Int], smallest_value: Int) -> [Int] {
