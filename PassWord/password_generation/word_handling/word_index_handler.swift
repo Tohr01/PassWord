@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 /**
  Various methods to handle a given word index containing information about word length filename and wordcount
  */
@@ -30,7 +31,7 @@ class WordHandler {
     func getMinimumWordLength() -> Int {
         return getAvaiableWordLengths().min()!
     }
-    
+
     /**
      Returns largest possible word length of word in index
 
@@ -39,7 +40,7 @@ class WordHandler {
     func getMaximumWordLength() -> Int {
         return getAvaiableWordLengths().max()!
     }
-    
+
     /**
      Returns all avaiable word lengths as an array
 
@@ -123,7 +124,7 @@ class WordHandler {
     func getMinimumDefaultLength() -> Int {
         return getMinimumWordLength() * 2 + 2
     }
-    
+
     /**
      Returns the biggest possible length of the password if the password has the format WXXXCW (W > Word, X > Number, C > Special character)
      */

@@ -15,7 +15,7 @@ func genRandomSpecialChar() -> String {
 
 func genRandomNumberStr(length: Int) -> String {
     var res = String()
-    for _ in 0..<length {
+    for _ in 0 ..< length {
         res += "\(Int.random(in: 0 ..< 10))"
     }
     return res
@@ -27,11 +27,11 @@ func getWordComposition(word_handler: WordHandler, targetLength: Int, evenWords:
         // Returns a tuple of two preferrably even numbers if possible
         let length_w_1 = Int(targetLength / 2)
         let length_w_2 = targetLength - length_w_1
-        if word_lengths_set.contains(length_w_1) && word_lengths_set.contains(length_w_2) {
+        if word_lengths_set.contains(length_w_1), word_lengths_set.contains(length_w_2) {
             return (length_w_1, length_w_2)
         }
     }
-    
+
     // Fallback or if evenWords = false
     // Shuffle set
     let word_lengths_shuffled = word_lengths_set.shuffled()

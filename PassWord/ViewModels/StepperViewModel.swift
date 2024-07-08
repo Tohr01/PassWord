@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  StepperViewModel.swift
 //  PassWord
 //
 //  Created by Carl Raabe on 20.12.21.

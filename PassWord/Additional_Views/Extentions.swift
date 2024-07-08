@@ -22,15 +22,15 @@ extension Binding {
 @available(macOS 11.0, *)
 extension Scene {
     func windowFitToContentSize() -> some Scene {
-            if #available(macOS 13.0, *) {
-                return windowResizability(.contentSize)
-            } else {
-                return self
-            }
+        if #available(macOS 13.0, *) {
+            return windowResizability(.contentSize)
+        } else {
+            return self
         }
+    }
 }
 
 extension StringProtocol {
-    var uppercaseFirstLetter: String { prefix(1).uppercased() + dropFirst()}
-    var lowercaseFirstLetter: String { prefix(1).lowercased() + dropFirst()}
+    var uppercaseFirstLetter: String { prefix(1).uppercased() + dropFirst() }
+    var lowercaseFirstLetter: String { prefix(1).lowercased() + dropFirst() }
 }

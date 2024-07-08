@@ -67,7 +67,7 @@ class NewAppDelegate: NSObject, NSApplicationDelegate {
         )
     }
 
-    @IBAction func about(_ sender: Any) {
+    @IBAction func about(_: Any) {
         // Open about window (or bring to front if already open)
         openAboutWin(window: &about_window)
     }
@@ -90,7 +90,7 @@ class OldAppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(nil)
     }
 
-    @IBAction func about(_ sender: Any) {
+    @IBAction func about(_: Any) {
         openAboutWin(window: &about_window)
     }
 }

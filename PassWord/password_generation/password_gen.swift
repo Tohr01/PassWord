@@ -35,8 +35,7 @@ func genPass(targetLength: Int, word_handler: WordHandler, evenWords: Bool = tru
         // Target lenth is in interval (min_size; max_size)
         passNumber = genRandomNumberStr(length: Int.random(in: 2 ... 3))
     }
-    
-    
+
     // The special character
     let special_char = genRandomSpecialChar()
     // Total word length of the two words without the number or the special character

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  PassWord
 //
 //  Created by Carl Raabe on 08.12.21.
@@ -41,7 +41,7 @@ struct MainView: View {
             }
             UserDefaults.standard.set(false, forKey: "firstLaunch")
         }
-        
+
         if let lang = UserDefaults.standard.value(forKey: "lang") as? String {
             lang_model.lang_set = true
             lang_model.current_lang = lang
@@ -62,10 +62,10 @@ struct MainView: View {
         }
 
         handler = WordHandler(index: index)
-        
+
         let minLength = handler.getMinimumDefaultLength()
         let maxLength = handler.getMaximumDefaultLength()
-        
+
         if let generated_password = genPass(targetLength: stepper_model.value, word_handler: handler) {
             current_password = generated_password
             stepper_model.value = 15
@@ -80,7 +80,7 @@ struct MainView: View {
         let minLength = handler.getMinimumDefaultLength()
         let maxLength = handler.getMaximumDefaultLength()
         if let new_pw = genPass(targetLength: length <= maxLength ? length : maxLength, word_handler: handler, evenWords: equal_words) {
-                current_password = new_pw
+            current_password = new_pw
         }
     }
 
@@ -138,7 +138,6 @@ struct MainView: View {
                     .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
                 .scaleEffect(scale_copy)
                 .animation(Animation.easeInOut, value: scale_copy)
-
                 .simultaneousGesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
                     .onChanged { _ in
                         scale_copy = 0.8
@@ -182,7 +181,7 @@ struct MainView: View {
                     })
 
                 Spacer()
-                
+
                 // MARK: Custom stepper
 
                 // Increase word length button
@@ -266,6 +265,7 @@ struct MainView: View {
                     .shadow(color: Color("default_shadow"), radius: 6, x: 0, y: 4))
 
                 // MARK: Settings
+
                 Button {
                     self.show_settings.toggle()
                 } label: {
