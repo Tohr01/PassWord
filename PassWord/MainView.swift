@@ -10,7 +10,7 @@ import SwiftUI
 struct MainView: View {
     // Current password
     @State private var current_password: String = ""
-    @State private var handler: word_handler = .init(index: word_index_english)
+    @State private var handler: WordHandler = .init(index: word_index_english)
 
     // Increase or decrease word length
     @ObservedObject private var stepper_model: StepperViewModel = .init(start_val: 15, min_value: 6, max_value: 31)
@@ -61,9 +61,12 @@ struct MainView: View {
             self.limit_chars = limit_chars
         }
 
-        handler = word_handler(index: index)
-
-        if let generated_password = genPass(targetLength: stepper_model.value, handler: handler), let maxLength = handler.getMaximumDefaultLength(), let minLength = handler.getMinimumDefaultLength() {
+        handler = WordHandler(index: index)
+        
+        let minLength = handler.getMinimumDefaultLength()
+        let maxLength = handler.getMaximumDefaultLength()
+        
+        if let generated_password = genPass(targetLength: stepper_model.value, word_handler: handler) {
             current_password = generated_password
             stepper_model.value = 15
             stepper_model.min_value = minLength - 1
@@ -74,8 +77,10 @@ struct MainView: View {
     func easy_gen_pass() {
         // Get current length
         let length = stepper_model.value
-        if let new_pw = genPass(targetLength: length, handler: handler, evenWords: equal_words) {
-            current_password = new_pw
+        let minLength = handler.getMinimumDefaultLength()
+        let maxLength = handler.getMaximumDefaultLength()
+        if let new_pw = genPass(targetLength: length <= maxLength ? length : maxLength, word_handler: handler, evenWords: equal_words) {
+                current_password = new_pw
         }
     }
 

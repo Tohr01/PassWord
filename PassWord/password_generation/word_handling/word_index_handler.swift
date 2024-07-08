@@ -9,7 +9,7 @@ import Foundation
 /**
  Various methods to handle a given word index containing information about word length filename and wordcount
  */
-class word_handler {
+class WordHandler {
     // The word index
     var index: [Int: String]
 
@@ -27,17 +27,26 @@ class word_handler {
 
      - Returns: Smallest word length as Int or nil
      */
-    func getMinimumWordLength() -> Int? {
-        index.keys.min() ?? nil
+    func getMinimumWordLength() -> Int {
+        return getAvaiableWordLengths().min()!
     }
+    
+    /**
+     Returns largest possible word length of word in index
 
+     - Returns: Smallest word length as Int or nil
+     */
+    func getMaximumWordLength() -> Int {
+        return getAvaiableWordLengths().max()!
+    }
+    
     /**
      Returns all avaiable word lengths as an array
 
      - Returns: The avaiable word lengths as an array
      */
-    func getAvaiableWordLengths() -> [Int] {
-        Array(index.keys)
+    func getAvaiableWordLengths() -> Set<Int> {
+        return Set(index.keys)
     }
 
     /**
@@ -48,7 +57,7 @@ class word_handler {
      - Returns: The filename; If entry not found returns nil
      */
     func getFileName(for word_length: Int) -> String? {
-        index[word_length] ?? nil
+        return index[word_length] ?? nil
     }
 
     /**
@@ -59,7 +68,7 @@ class word_handler {
      - Returns: true if word_length is avaiable in index; false if not
      */
     func isWordLengthAvaiable(word_length: Int) -> Bool {
-        getAvaiableWordLengths().contains(word_length)
+        return getAvaiableWordLengths().contains(word_length)
     }
 
     /**
@@ -109,19 +118,16 @@ class word_handler {
     }
 
     /**
-     Returns the smallest possible length of the password if the password has the format WXXCW (W > Word, X > Number, C > Special character)
+     Returns the smallest possible length of the password if the password has the format WXCW (W > Word, X > Number, C > Special character)
      */
-    func getMinimumDefaultLength() -> Int? {
-        if let minimum_word_length = getAvaiableWordLengths().min() {
-            return minimum_word_length * 2 + 3
-        }
-        return nil
+    func getMinimumDefaultLength() -> Int {
+        return getMinimumWordLength() * 2 + 2
     }
-
-    func getMaximumDefaultLength() -> Int? {
-        if let maximum_word_length = getAvaiableWordLengths().max() {
-            return maximum_word_length * 2 + 3
-        }
-        return nil
+    
+    /**
+     Returns the biggest possible length of the password if the password has the format WXXXCW (W > Word, X > Number, C > Special character)
+     */
+    func getMaximumDefaultLength() -> Int {
+        return getMaximumWordLength() * 2 + 4
     }
 }
