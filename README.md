@@ -16,7 +16,7 @@ PassWord has been localized into the following languages and can generate passwo
 - macOS 10.15 (Catalina) or higher
 
 ## ⬇️ Installation
-- Download the latest compiled release from the releases tab
+- Download the latest compiled release from the [Releases](https://github.com/Tohr01/PassWord/releases) tab
 - Compile from source
 
 ## 🍩 Acknowledgements
