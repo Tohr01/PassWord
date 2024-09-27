@@ -17,7 +17,7 @@ PassWord has been localized into the following languages and can generate passwo
 
 ## ⬇️ Installation
 - Download the latest compiled release from the [Releases](https://github.com/Tohr01/PassWord/releases) tab
-or
+<br>or
 - Compile from source
 
 ## 🍩 Acknowledgements
